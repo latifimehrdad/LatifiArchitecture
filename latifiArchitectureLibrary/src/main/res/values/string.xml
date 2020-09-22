@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="Ignore">بستن</string>
+    <string name="NetworkError">خطا در اتصال به سرور</string>
+    <string name="InternetNotAvailable">اینترنت دستگاه خود را روشن کنید</string>
+
+</resources>

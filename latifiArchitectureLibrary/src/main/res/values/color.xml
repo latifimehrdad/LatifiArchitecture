@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimaryDark">#017E81</color>
+
+    <color name="mlHarmony">#1f3bed</color>
+    <color name="mlWhite">#ffffff</color>
+    <color name="mlFooter">#CCCCCC</color>
+    <color name="mlBlack">#000</color>
+    <color name="mlHomeAveScore">#E7414F</color>
+    <color name="mlCollectRight1">#EF7F2F</color>
+    <color name="mlCollectRight2">#A24A0B</color>
+
+</resources>

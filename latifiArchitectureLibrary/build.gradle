@@ -20,6 +20,14 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+    }
 
 }
 
@@ -56,6 +64,8 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 
     api 'io.github.inflationx:calligraphy3:3.1.1'
+
+    api 'com.intuit.sdp:sdp-android:1.0.5'
 
 
 }
