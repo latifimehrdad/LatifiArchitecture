@@ -1,5 +1,15 @@
 # LatifiArchitecture
 
+| Used From |
+| --- |
+| retrofit2 |
+| Dagger |
+| universalimageloader |
+| butterknife |
+| calligraphy |
+| rxjava2 |
+
+
 
 ## How To Use?
 
