@@ -1,0 +1,3 @@
+include ':latifiArchitectureLibrary'
+include ':app'
+rootProject.name = "LatifiArchitecture"
