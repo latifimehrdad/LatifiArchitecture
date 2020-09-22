@@ -8,6 +8,7 @@
 | butterknife |
 | calligraphy |
 | rxjava2 |
+| multidex |
 
 
 
@@ -36,4 +37,24 @@ Add the dependency
 dependencies {
 	        implementation 'com.github.latifimehrdad:LatifiArchitecture:1.0'
 	}
+```
+
+***Step 3***
+
+Add this code to build.gradle
+
+```
+android {
+    ...
+    defaultConfig {
+        ...
+        multiDexEnabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
 ```
