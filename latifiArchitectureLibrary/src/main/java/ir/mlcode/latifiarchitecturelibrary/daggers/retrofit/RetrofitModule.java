@@ -22,9 +22,11 @@ public class RetrofitModule {
 
 
     private Context context;
+    private String Host;
 
-    public RetrofitModule(Context context) {
+    public RetrofitModule(Context context, String Host) {
         this.context = context;
+        this.Host = Host;
     }
 
 
@@ -42,7 +44,7 @@ public class RetrofitModule {
 //                .create();
 
         return new retrofit2.Retrofit.Builder()
-                .baseUrl(RetrofitApis.Host)
+                .baseUrl(Host)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(okHttpClient)
