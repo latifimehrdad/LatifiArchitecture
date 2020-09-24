@@ -67,5 +67,7 @@ dependencies {
 
     api 'com.intuit.sdp:sdp-android:1.0.5'
 
+    api 'com.yangping:ypwaveview:1.0.3'
+
 
 }

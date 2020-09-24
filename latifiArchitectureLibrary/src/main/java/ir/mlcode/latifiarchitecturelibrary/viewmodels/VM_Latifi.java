@@ -4,22 +4,30 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.databinding.BaseObservable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.subjects.PublishSubject;
 import ir.mlcode.latifiarchitecturelibrary.R;
@@ -341,5 +349,44 @@ public class VM_Latifi extends BaseObservable {
     }
     //______________________________________________________________________________________________ hideKeyboard
 
+
+    //______________________________________________________________________________________________ setPermission
+    public void setPermission(List<String> permissions) {
+
+        List<String> listPermissionsNeeded = new ArrayList<>();
+
+        for (String permission : permissions) {
+            int check = ContextCompat.checkSelfPermission(getContext(), permission);
+            if (check != PackageManager.PERMISSION_GRANTED)
+                listPermissionsNeeded.add(permission);
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(getContext(),
+                    listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
+                    0);
+        }
+
+    }
+    //______________________________________________________________________________________________ setPermission
+
+
+    //______________________________________________________________________________________________ getTempUri
+    public Uri getTempUri(String filename, String appName, String applicationId) {
+        File imageFile;
+        imageFile = new File(Environment.getExternalStorageDirectory()
+                + "/" + appName + "/", filename);
+
+        Uri imageUri;
+        applicationId = applicationId + ".provider";
+
+        imageUri = FileProvider.getUriForFile(
+                getContext(),
+                applicationId,
+                imageFile);
+
+        return imageUri;
+    }
+    //______________________________________________________________________________________________ getTempUri
 
 }

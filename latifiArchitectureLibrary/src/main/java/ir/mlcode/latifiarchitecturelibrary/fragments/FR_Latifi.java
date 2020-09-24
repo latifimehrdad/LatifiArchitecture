@@ -1,8 +1,10 @@
 package ir.mlcode.latifiarchitecturelibrary.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -121,6 +123,26 @@ public class FR_Latifi extends Fragment {
         setObserverToObservable(publishSubject);
     }
     //______________________________________________________________________________________________ setPublishSubjectFromObservable
+
+
+
+
+    //______________________________________________________________________________________________ setPublishSubjectFromObservable
+    public void setPublishSubjectFromObservable(
+            getActionFromObservable getActionFromObservable,
+            PublishSubject<Byte> publishSubject,
+            VM_Latifi vm_latifi) {
+        this.getActionFromObservable = getActionFromObservable;
+        if (disposableObserver != null)
+            disposableObserver.dispose();
+        disposableObserver = null;
+        this.vm_latifi = vm_latifi;
+        this.svg_error = R.drawable.svg_warning;
+        this.svg_ok = R.drawable.svg_checked;
+        setObserverToObservable(publishSubject);
+    }
+    //______________________________________________________________________________________________ setPublishSubjectFromObservable
+
 
 
     //______________________________________________________________________________________________ setObserverToObservable
@@ -246,5 +268,11 @@ public class FR_Latifi extends Fragment {
     //______________________________________________________________________________________________ textChangeForChangeBack
 
 
+    //______________________________________________________________________________________________ turnOnLocation
+    public void turnOnLocation() {
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        startActivity(intent);
+    }
+    //______________________________________________________________________________________________ turnOnLocation
 
 }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="update"
+            type="ir.mlcode.latifiarchitecturelibrary.viewmodels.VM_Update" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.yangp.ypwaveview.YPWaveView
+            android:id="@+id/yPWaveView"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:animatorEnable="true"
+            app:textHidden="false"
+            app:shapeType="circle"
+            app:frontColor="@color/mlWave"
+            app:behideColor="@color/mlWave2"
+            app:borderColor="@color/mlWave3"
+            app:borderWidthSize="3dp"
+            app:textColor="@color/mlWave4"
+            app:max="100"
+            app:progress="20"
+            app:strong="50" />
+
+
+        <TextView
+            android:id="@+id/TextViewProgress"
+            android:layout_width="@dimen/_95sdp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/_9sdp"
+            android:layout_above="@id/yPWaveView"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:gravity="center"/>
+
+
+        <Button
+            android:id="@+id/ButtonInstall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_red"
+            android:textColor="@color/mlWhite"
+            android:textSize="@dimen/_10sdp"
+            android:text="@string/InstallApp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:paddingRight="@dimen/_10sdp"
+            android:paddingLeft="@dimen/_10sdp"/>
+
+
+    </RelativeLayout>
+
+</layout>
