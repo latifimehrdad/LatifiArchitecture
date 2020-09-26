@@ -55,6 +55,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    dataBinding {
+        enabled = true
+    }
+
 }
 ```
 
@@ -86,36 +90,36 @@ public interface RetrofitApiInterface {
 Create a Application Class Like this
 
 ```
-public class TestApplication extends MultiDexApplication {
+public class testApplication extends APP_Latifi {
 
     private Context context;
+    public String Host = "http://You Api Link";
     private RetrofitApiInterface retrofitApiInterface;
-    public  String Host = "http://Yout Link";
+
 
     @Override
     public void onCreate() {
         super.onCreate();
         this.context = getApplicationContext();
-        ConfigurationRetrofitComponent();
+        setContext(this.context);
+        setHost(Host);
+        configurationRetrofitComponent();
     }
 
-
-    //______________________________________________________________________________________________ getTestApplication
-    public static TestApplication getTestApplication(Context context) {
-        return (TestApplication) context.getApplicationContext();
+    //______________________________________________________________________________________________ getApplication
+    public static testApplication getApplicationWMS(Context context) {
+        return (testApplication) context.getApplicationContext();
     }
-    //______________________________________________________________________________________________ getTestApplication
+    //______________________________________________________________________________________________ getApplication
 
 
 
-    //______________________________________________________________________________________________ ConfigurationRetrofitComponent
-    private void ConfigurationRetrofitComponent() {
-        retrofitApiInterface = DaggerRetrofitComponent
-                .builder()
-                .retrofitModule(new RetrofitModule(context,Host))
-                .build().getRetrofit().create(RetrofitApiInterface.class);
+    //______________________________________________________________________________________________ configurationRetrofitComponent
+    private void configurationRetrofitComponent() {
+        retrofitApiInterface = getRetrofitComponent().getRetrofit().create(RetrofitApiInterface.class);
     }
-    //______________________________________________________________________________________________ ConfigurationRetrofitComponent
+    //______________________________________________________________________________________________ configurationRetrofitComponent
+
 
 
     //______________________________________________________________________________________________ getRetrofitApiInterface
@@ -123,29 +127,8 @@ public class TestApplication extends MultiDexApplication {
         return retrofitApiInterface;
     }
     //______________________________________________________________________________________________ getRetrofitApiInterface
+    
 }
 
-```
-
-***Step 5***
-
-in MainActivity
-
-```
-RetrofitApiInterface retrofit = TestApplication.getTestApplication(this).getRetrofitApiInterface();
-        retrofit.getToken(client_id_value, client_secret_value,grant_type_value)
-                .enqueue(new Callback<MD_Token>() {
-                    @Override
-                    public void onResponse(Call<MD_Token> call, Response<MD_Token> response) {
-                        Log.i("latifi", response.message());
-                        Log.i("latifi", response.body().getAccess_token());
-                    }
-
-                    @Override
-                    public void onFailure(Call<MD_Token> call, Throwable t) {
-                        Log.i("latifi", t.getMessage());
-                    }
-                });
-		
 ```
 
