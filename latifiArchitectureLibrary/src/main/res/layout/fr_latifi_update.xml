@@ -4,7 +4,7 @@
     <data>
         <variable
             name="update"
-            type="ir.mlcode.latifiarchitecturelibrary.viewmodels.VM_Update" />
+            type="ir.mlcode.latifiarchitecturelibrary.viewmodels.VM_LatifiUpdate" />
     </data>
 
     <RelativeLayout

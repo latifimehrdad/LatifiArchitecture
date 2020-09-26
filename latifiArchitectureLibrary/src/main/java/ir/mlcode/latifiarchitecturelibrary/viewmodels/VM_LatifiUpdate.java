@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import ir.mlcode.latifiarchitecturelibrary.utility.DownloadTask;
 
-public class VM_Update extends VM_Latifi {
+public class VM_LatifiUpdate extends VM_Latifi {
 
 
     private String fileUrl;
@@ -14,7 +14,7 @@ public class VM_Update extends VM_Latifi {
 
 
     //______________________________________________________________________________________________ VM_Update
-    public VM_Update(Activity context) {
+    public VM_LatifiUpdate(Activity context) {
         setContext(context);
     }
     //______________________________________________________________________________________________ VM_Update

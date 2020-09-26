@@ -24,15 +24,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.mlcode.latifiarchitecturelibrary.R;
-import ir.mlcode.latifiarchitecturelibrary.databinding.FrUpdateBinding;
+import ir.mlcode.latifiarchitecturelibrary.databinding.FrLatifiUpdateBinding;
 import ir.mlcode.latifiarchitecturelibrary.utility.DownloadTask;
 import ir.mlcode.latifiarchitecturelibrary.utility.StaticValues;
-import ir.mlcode.latifiarchitecturelibrary.viewmodels.VM_Update;
+import ir.mlcode.latifiarchitecturelibrary.viewmodels.VM_LatifiUpdate;
 
-public class AppUpdate extends FR_Latifi implements FR_Latifi.getActionFromObservable{
+public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.getActionFromObservable {
 
 
-    private VM_Update vm_update;
+    private VM_LatifiUpdate vm_Latifi_update;
     private String fileName;
     private Handler handlerDownload;
     private String appName;
@@ -52,10 +52,10 @@ public class AppUpdate extends FR_Latifi implements FR_Latifi.getActionFromObser
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         if (getView() == null) {
-            vm_update = new VM_Update(getContext());
-            FrUpdateBinding binding = DataBindingUtil.inflate(
-                    inflater, R.layout.fr_update, container, false);
-            binding.setUpdate(vm_update);
+            vm_Latifi_update = new VM_LatifiUpdate(getContext());
+            FrLatifiUpdateBinding binding = DataBindingUtil.inflate(
+                    inflater, R.layout.fr_latifi_update, container, false);
+            binding.setUpdate(vm_Latifi_update);
             setView(binding.getRoot());
             TextViewProgress = getView().findViewById(R.id.TextViewProgress);
             ButtonInstall = getView().findViewById(R.id.ButtonInstall);
@@ -78,9 +78,9 @@ public class AppUpdate extends FR_Latifi implements FR_Latifi.getActionFromObser
     public void onStart() {
         super.onStart();
         setPublishSubjectFromObservable(
-                AppUpdate.this,
-                vm_update.getPublishSubject(),
-                vm_update);
+                FR_LatifiUpdate.this,
+                vm_Latifi_update.getPublishSubject(),
+                vm_Latifi_update);
         List<String> list = new ArrayList<>();
         list.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         list.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -109,7 +109,7 @@ public class AppUpdate extends FR_Latifi implements FR_Latifi.getActionFromObser
         ButtonInstall.setOnClickListener(v -> {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Uri uri = vm_update.getTempUri(fileName , appName, applicationId);
+                Uri uri = vm_Latifi_update.getTempUri(fileName, appName, applicationId);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 intent.putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true);
                 intent.setDataAndType(uri, "application/vnd.android.package-archive");
@@ -144,10 +144,10 @@ public class AppUpdate extends FR_Latifi implements FR_Latifi.getActionFromObser
             if (!fileUrl.equalsIgnoreCase(""))
                 if (!fileName.equalsIgnoreCase("")) {
                     setProgress();
-                    vm_update.setFileUrl(fileUrl);
-                    vm_update.setFileName(fileName);
-                    vm_update.setAppName(appName);
-                    vm_update.downloadFile();
+                    vm_Latifi_update.setFileUrl(fileUrl);
+                    vm_Latifi_update.setFileName(fileName);
+                    vm_Latifi_update.setAppName(appName);
+                    vm_Latifi_update.downloadFile();
                 }
             return;
         }
@@ -172,8 +172,6 @@ public class AppUpdate extends FR_Latifi implements FR_Latifi.getActionFromObser
     //______________________________________________________________________________________________ getMessageFromObservable
 
 
-
-
     //______________________________________________________________________________________________ setProgress
     private void setProgress() {
         handlerDownload = new Handler();
@@ -194,7 +192,6 @@ public class AppUpdate extends FR_Latifi implements FR_Latifi.getActionFromObser
     public void actionWhenFailureRequest() {
     }
     //______________________________________________________________________________________________ actionWhenFailureRequest
-
 
 
 }
