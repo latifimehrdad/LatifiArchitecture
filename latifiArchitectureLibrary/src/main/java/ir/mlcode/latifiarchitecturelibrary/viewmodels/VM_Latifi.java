@@ -31,6 +31,7 @@ import java.util.List;
 
 import io.reactivex.subjects.PublishSubject;
 import ir.mlcode.latifiarchitecturelibrary.R;
+import ir.mlcode.latifiarchitecturelibrary.application.APP_Latifi;
 import ir.mlcode.latifiarchitecturelibrary.daggers.utility.DaggerUtilityComponent;
 import ir.mlcode.latifiarchitecturelibrary.daggers.utility.UtilityComponent;
 import ir.mlcode.latifiarchitecturelibrary.daggers.utility.UtilityModule;
@@ -43,7 +44,6 @@ import retrofit2.Response;
 
 public class VM_Latifi extends BaseObservable {
 
-    public static UtilityComponent utilityComponent;
     private PublishSubject<Byte> publishSubject;
     private String responseMessage;
     private Call primaryCall;
@@ -175,10 +175,10 @@ public class VM_Latifi extends BaseObservable {
 
 
     //______________________________________________________________________________________________ onFailureRequest
-    public void onFailureRequest(Byte ML_RequestCancel) {
+    public void onFailureRequest() {
         if (getPrimaryCall().isCanceled()) {
             setResponseMessage("");
-            getPublishSubject().onNext(ML_RequestCancel);
+            getPublishSubject().onNext(StaticValues.ML_RequestCancel);
         } else {
             setResponseMessage(getContext().getResources().getString(R.string.NetworkError));
             getPublishSubject().onNext(StaticValues.ML_ResponseFailure);
@@ -253,12 +253,6 @@ public class VM_Latifi extends BaseObservable {
     public void setContext(
             Activity context) {
         this.context = context;
-        if (utilityComponent == null) {
-            utilityComponent = DaggerUtilityComponent
-                    .builder()
-                    .utilityModule(new UtilityModule())
-                    .build();
-        }
     }
     //______________________________________________________________________________________________ setContext
 
@@ -330,7 +324,7 @@ public class VM_Latifi extends BaseObservable {
     //______________________________________________________________________________________________ getUtility
     public ApplicationUtility getUtility() {
 
-        return utilityComponent.getApplicationUtility();
+        return APP_Latifi.getAPP_Latifi(getContext()).getUtilityComponent().getApplicationUtility();
     }
     //______________________________________________________________________________________________ getUtility
 
@@ -348,27 +342,6 @@ public class VM_Latifi extends BaseObservable {
         }
     }
     //______________________________________________________________________________________________ hideKeyboard
-
-
-    //______________________________________________________________________________________________ setPermission
-    public void setPermission(List<String> permissions) {
-
-        List<String> listPermissionsNeeded = new ArrayList<>();
-
-        for (String permission : permissions) {
-            int check = ContextCompat.checkSelfPermission(getContext(), permission);
-            if (check != PackageManager.PERMISSION_GRANTED)
-                listPermissionsNeeded.add(permission);
-        }
-
-        if (!listPermissionsNeeded.isEmpty()) {
-            ActivityCompat.requestPermissions(getContext(),
-                    listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
-                    0);
-        }
-
-    }
-    //______________________________________________________________________________________________ setPermission
 
 
     //______________________________________________________________________________________________ getTempUri

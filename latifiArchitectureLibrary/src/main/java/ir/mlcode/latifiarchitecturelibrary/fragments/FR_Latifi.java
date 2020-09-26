@@ -1,7 +1,9 @@
 package ir.mlcode.latifiarchitecturelibrary.fragments;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -11,8 +13,14 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -34,6 +42,7 @@ public class FR_Latifi extends Fragment {
     private VM_Latifi vm_latifi;
     private int svg_error;
     private int svg_ok;
+    private int REQUEST_PERMISSIONS_CODE_WRITE_STORAGE = 7126;
 
 
     //______________________________________________________________________________________________ getActionFromObservable
@@ -125,8 +134,6 @@ public class FR_Latifi extends Fragment {
     //______________________________________________________________________________________________ setPublishSubjectFromObservable
 
 
-
-
     //______________________________________________________________________________________________ setPublishSubjectFromObservable
     public void setPublishSubjectFromObservable(
             getActionFromObservable getActionFromObservable,
@@ -142,7 +149,6 @@ public class FR_Latifi extends Fragment {
         setObserverToObservable(publishSubject);
     }
     //______________________________________________________________________________________________ setPublishSubjectFromObservable
-
 
 
     //______________________________________________________________________________________________ setObserverToObservable
@@ -240,7 +246,7 @@ public class FR_Latifi extends Fragment {
     //______________________________________________________________________________________________ getApplicationUtility
     public ApplicationUtility getApplicationUtility() {
 
-        return VM_Latifi.utilityComponent.getApplicationUtility();
+        return vm_latifi.getUtility();
     }
     //______________________________________________________________________________________________ getApplicationUtility
 
@@ -274,5 +280,48 @@ public class FR_Latifi extends Fragment {
         startActivity(intent);
     }
     //______________________________________________________________________________________________ turnOnLocation
+
+
+    //______________________________________________________________________________________________ setPermission
+    public void setPermission(List<String> permissions) {
+
+        List<String> listPermissionsNeeded = new ArrayList<>();
+
+        for (String permission : permissions) {
+            int check = ContextCompat.checkSelfPermission(getContext(), permission);
+            if (check != PackageManager.PERMISSION_GRANTED)
+                listPermissionsNeeded.add(permission);
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            requestPermissions(listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
+                    REQUEST_PERMISSIONS_CODE_WRITE_STORAGE);
+        } else
+            vm_latifi.sendActionToObservable(StaticValues.ML_CheckPermission);
+
+    }
+    //______________________________________________________________________________________________ setPermission
+
+
+    //______________________________________________________________________________________________ onRequestPermissionsResult
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        boolean accessPermission = true;
+        for (String permission : permissions) {
+            int check = ContextCompat.checkSelfPermission(getContext(), permission);
+            if (check != PackageManager.PERMISSION_GRANTED) {
+                accessPermission = false;
+                break;
+            }
+        }
+
+        if (accessPermission)
+            vm_latifi.sendActionToObservable(StaticValues.ML_CheckPermission);
+        else
+            getContext().onBackPressed();
+
+    }
+    //______________________________________________________________________________________________ onRequestPermissionsResult
+
 
 }

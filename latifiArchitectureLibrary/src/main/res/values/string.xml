@@ -8,8 +8,10 @@
     <string name="PleaseWait">شکیبا باشید …</string>
 
 
+    <string name="ML_AppName">App_Name</string>
+    <string name="ML_ApplicationId">ApplicationId</string>
     <string name="ML_UpdateUrl">ML_UpdateUrl</string>
-    <string name="ML_UpdateFile">ML_UpdateFile></string>
+    <string name="ML_UpdateFileName">ML_UpdateFileName></string>
     <string name="FileDownloaded">پایان بارگیری فایل</string>
 
 </resources>

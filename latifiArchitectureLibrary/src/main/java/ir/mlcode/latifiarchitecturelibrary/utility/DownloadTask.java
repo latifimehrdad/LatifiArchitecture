@@ -17,14 +17,16 @@ import io.reactivex.subjects.PublishSubject;
 public class DownloadTask extends AsyncTask<String, Integer, String> {
 
     private Context context;
-    private String path;
+    private String fileName;
+    private String appName;
     private PublishSubject<Byte> publishSubject;
     public static int progressDownload;
 
 
-    public DownloadTask(Context context, String path, PublishSubject<Byte> publishSubject) {
+    public DownloadTask(Context context, String fileName, String appName, PublishSubject<Byte> publishSubject) {
         this.context = context;
-        this.path = Environment.getExternalStorageDirectory() + "/WMS/" + path;
+        this.appName = appName;
+        this.fileName = Environment.getExternalStorageDirectory() + "/" + appName + "/" + fileName;
         this.publishSubject = publishSubject;
         progressDownload = 0;
     }
@@ -38,7 +40,7 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
         HttpURLConnection connection = null;
         try {
 
-            File file = new File(Environment.getExternalStorageDirectory() + "/WMS/");
+            File file = new File(Environment.getExternalStorageDirectory() + "/" + appName + "/");
             if (!file.exists()) {
                 file.mkdir();
             }
@@ -60,7 +62,7 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
 
             // download the file
             input = connection.getInputStream();
-            output = new FileOutputStream(path);
+            output = new FileOutputStream(fileName);
 
             byte data[] = new byte[4096];
             long total = 0;

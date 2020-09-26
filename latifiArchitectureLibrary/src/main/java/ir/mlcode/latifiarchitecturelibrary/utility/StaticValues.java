@@ -9,6 +9,7 @@ public class StaticValues {
     public static Byte ML_InternetAccessFailed = -123;
     public static Byte ML_FileDownloaded = -122;
     public static Byte ML_FileDownloading = -121;
+    public static Byte ML_CheckPermission = -120;
 
 
 }

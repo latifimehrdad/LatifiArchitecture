@@ -1,6 +1,6 @@
 package ir.mlcode.latifiarchitecturelibrary.fragments;
 
-import android.annotation.SuppressLint;
+import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -20,6 +20,8 @@ import androidx.databinding.DataBindingUtil;
 import com.yangp.ypwaveview.YPWaveView;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import ir.mlcode.latifiarchitecturelibrary.R;
 import ir.mlcode.latifiarchitecturelibrary.databinding.FrUpdateBinding;
@@ -35,6 +37,7 @@ public class AppUpdate extends FR_Latifi implements FR_Latifi.getActionFromObser
     private Handler handlerDownload;
     private String appName;
     private String applicationId;
+    private String fileUrl;
 
     TextView TextViewProgress;
     Button ButtonInstall;
@@ -78,6 +81,10 @@ public class AppUpdate extends FR_Latifi implements FR_Latifi.getActionFromObser
                 AppUpdate.this,
                 vm_update.getPublishSubject(),
                 vm_update);
+        List<String> list = new ArrayList<>();
+        list.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        list.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        setPermission(list);
     }
     //______________________________________________________________________________________________ onStart
 
@@ -85,15 +92,12 @@ public class AppUpdate extends FR_Latifi implements FR_Latifi.getActionFromObser
     //______________________________________________________________________________________________ init
     private void init() {
         if (getContext() != null && getArguments() != null) {
-            String url = getArguments().getString(getContext().getResources().getString(R.string.ML_UpdateUrl), "");
-            fileName = getArguments().getString(getContext().getResources().getString(R.string.ML_UpdateFile), "");
+            fileUrl = getArguments().getString(getContext().getResources().getString(R.string.ML_UpdateUrl), "");
+            fileName = getArguments().getString(getContext().getResources().getString(R.string.ML_UpdateFileName), "");
+            appName = getArguments().getString(getContext().getResources().getString(R.string.ML_AppName), "");
+            applicationId = getArguments().getString(getContext().getResources().getString(R.string.ML_ApplicationId), "");
 
-            if (!url.equalsIgnoreCase(""))
-                if (!fileName.equalsIgnoreCase("")) {
-                    setProgress();
-                    vm_update.downloadFile(url, fileName);
-                }
-//                    vm_update.downloadFile(url, fileName);
+
         }
 
     }
@@ -136,6 +140,17 @@ public class AppUpdate extends FR_Latifi implements FR_Latifi.getActionFromObser
 
         handlerDownload = null;
 
+        if (action.equals(StaticValues.ML_CheckPermission)) {
+            if (!fileUrl.equalsIgnoreCase(""))
+                if (!fileName.equalsIgnoreCase("")) {
+                    setProgress();
+                    vm_update.setFileUrl(fileUrl);
+                    vm_update.setFileName(fileName);
+                    vm_update.setAppName(appName);
+                    vm_update.downloadFile();
+                }
+            return;
+        }
 
         if (action.equals(StaticValues.ML_FileDownloading)) {
             yPWaveView.setProgress(0);
@@ -179,5 +194,7 @@ public class AppUpdate extends FR_Latifi implements FR_Latifi.getActionFromObser
     public void actionWhenFailureRequest() {
     }
     //______________________________________________________________________________________________ actionWhenFailureRequest
+
+
 
 }

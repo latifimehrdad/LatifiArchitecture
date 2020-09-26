@@ -6,6 +6,13 @@ import ir.mlcode.latifiarchitecturelibrary.utility.DownloadTask;
 
 public class VM_Update extends VM_Latifi {
 
+
+    private String fileUrl;
+    private String fileName;
+    private String appName;
+
+
+
     //______________________________________________________________________________________________ VM_Update
     public VM_Update(Activity context) {
         setContext(context);
@@ -14,12 +21,62 @@ public class VM_Update extends VM_Latifi {
 
 
     //______________________________________________________________________________________________ downloadFile
-    public void downloadFile(String url, String filePath) {
+    public void downloadFile() {
 
-        DownloadTask downloadTask = new DownloadTask(getContext(), filePath, getPublishSubject());
-        downloadTask.execute(url);
+        DownloadTask downloadTask = new DownloadTask(getContext(), getFileName(), getAppName(), getPublishSubject());
+        downloadTask.execute(getFileUrl());
     }
     //______________________________________________________________________________________________ downloadFile
+
+
+
+    //______________________________________________________________________________________________ getFileUrl
+    public String getFileUrl() {
+        return fileUrl;
+    }
+    //______________________________________________________________________________________________ getFileUrl
+
+
+
+    //______________________________________________________________________________________________ setFileUrl
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
+    //______________________________________________________________________________________________ setFileUrl
+
+
+
+
+    //______________________________________________________________________________________________ getFileName
+    public String getFileName() {
+        return fileName;
+    }
+    //______________________________________________________________________________________________ getFileName
+
+
+
+    //______________________________________________________________________________________________ setFileName
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+    //______________________________________________________________________________________________ setFileName
+
+
+
+
+    //______________________________________________________________________________________________ getAppName
+    public String getAppName() {
+        return appName;
+    }
+    //______________________________________________________________________________________________ getAppName
+
+
+
+    //______________________________________________________________________________________________ setAppName
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
+    //______________________________________________________________________________________________ setAppName
 
 
 }
