@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_host"
+    app:startDestination="@id/FR_A">
+
+    <fragment
+        android:id="@+id/FR_A"
+        android:name="com.example.latifiarchitecture.FR_A"
+        android:label="FR_A"
+        tools:layout="@layout/fr_a">
+        <action
+            android:id="@+id/action_FR_A_to_FR_B"
+            app:destination="@id/FR_B" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/FR_B"
+        android:name="com.example.latifiarchitecture.FR_B"
+        android:label="FR_B"
+        tools:layout="@layout/fr_b"/>
+</navigation>

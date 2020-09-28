@@ -1,6 +1,5 @@
 package ir.mlcode.latifiarchitecturelibrary.fragments;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,20 +8,22 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -38,18 +39,22 @@ public class FR_Latifi extends Fragment {
     private DisposableObserver<Byte> disposableObserver;
     private Activity context;
     private View view;
-    private getActionFromObservable getActionFromObservable;
+    private fragmentActions fragmentActions;
     private VM_Latifi vm_latifi;
     private int svg_error;
     private int svg_ok;
-    private int REQUEST_PERMISSIONS_CODE_WRITE_STORAGE = 7126;
+    private OnBackPressedCallback pressedCallback;
 
 
     //______________________________________________________________________________________________ getActionFromObservable
-    public interface getActionFromObservable {
+    public interface fragmentActions {
+
         void getActionFromObservable(Byte action);
 
         void actionWhenFailureRequest();
+
+        void OnBackPress();
+
     }
     //______________________________________________________________________________________________ getActionFromObservable
 
@@ -65,6 +70,13 @@ public class FR_Latifi extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getActivity();
+        pressedCallback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                fragmentActions.OnBackPress();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, pressedCallback);
     }
     //______________________________________________________________________________________________ onCreate
 
@@ -110,19 +122,28 @@ public class FR_Latifi extends Fragment {
     //______________________________________________________________________________________________ setView
     public void setView(View view) {
         this.view = view;
-        ButterKnife.bind(this, view);
+/*        this.view.setFocusableInTouchMode(true);
+        this.view.requestFocus();
+        this.view.setOnKeyListener((v, keyCode, event) -> {
+            if (event.getAction() == KeyEvent.ACTION_UP)
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    Log.i("meri", "back");
+                    return true;
+                }
+            return false;
+        });*/
     }
     //______________________________________________________________________________________________ setView
 
 
     //______________________________________________________________________________________________ setPublishSubjectFromObservable
     public void setPublishSubjectFromObservable(
-            getActionFromObservable getActionFromObservable,
+            fragmentActions fragmentActions,
             PublishSubject<Byte> publishSubject,
             VM_Latifi vm_latifi,
             int svg_error,
             int svg_ok) {
-        this.getActionFromObservable = getActionFromObservable;
+        this.fragmentActions = fragmentActions;
         if (disposableObserver != null)
             disposableObserver.dispose();
         disposableObserver = null;
@@ -136,10 +157,10 @@ public class FR_Latifi extends Fragment {
 
     //______________________________________________________________________________________________ setPublishSubjectFromObservable
     public void setPublishSubjectFromObservable(
-            getActionFromObservable getActionFromObservable,
+            fragmentActions fragmentActions,
             PublishSubject<Byte> publishSubject,
             VM_Latifi vm_latifi) {
-        this.getActionFromObservable = getActionFromObservable;
+        this.fragmentActions = fragmentActions;
         if (disposableObserver != null)
             disposableObserver.dispose();
         disposableObserver = null;
@@ -183,7 +204,7 @@ public class FR_Latifi extends Fragment {
     private void actionHandler(Byte action) {
         if (getContext() != null) {
             getContext().runOnUiThread(() -> {
-                getActionFromObservable.getActionFromObservable(action);
+                fragmentActions.getActionFromObservable(action);
 
                 if (action.equals(StaticValues.ML_DialogClose))
                     return;
@@ -202,7 +223,7 @@ public class FR_Latifi extends Fragment {
                             getResources().getColor(R.color.mlHarmony),
                             getResources().getDrawable(svg_error),
                             getResources().getColor(R.color.mlCollectRight1));
-                    getActionFromObservable.actionWhenFailureRequest();
+                    fragmentActions.actionWhenFailureRequest();
                     return;
                 } else {
                     showMessageDialog(vm_latifi.getResponseMessage()
@@ -294,6 +315,7 @@ public class FR_Latifi extends Fragment {
         }
 
         if (!listPermissionsNeeded.isEmpty()) {
+            int REQUEST_PERMISSIONS_CODE_WRITE_STORAGE = 7126;
             requestPermissions(listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
                     REQUEST_PERMISSIONS_CODE_WRITE_STORAGE);
         } else
@@ -322,6 +344,33 @@ public class FR_Latifi extends Fragment {
 
     }
     //______________________________________________________________________________________________ onRequestPermissionsResult
+
+
+    //______________________________________________________________________________________________ setVariableToNavigation
+    public void setVariableToNavigation(String saveKey, String saveValue) {
+        if (getView() != null)
+            Navigation.findNavController(getView()).getPreviousBackStackEntry().getSavedStateHandle().set(saveKey, saveValue);
+    }
+    //______________________________________________________________________________________________ setVariableToNavigation
+
+
+    //______________________________________________________________________________________________ getVariableToNavigation
+    public String getVariableToNavigation(String saveKey) {
+        if (getView() != null)
+            return Navigation.findNavController(getView()).getCurrentBackStackEntry().getSavedStateHandle().get(saveKey);
+        else
+            return null;
+    }
+    //______________________________________________________________________________________________ getVariableToNavigation
+
+
+    //______________________________________________________________________________________________ removeCallBackAndBack
+    public void removeCallBackAndBack() {
+        pressedCallback.remove();
+        assert getContext() != null;
+        getContext().onBackPressed();
+    }
+    //______________________________________________________________________________________________ removeCallBackAndBack
 
 
 }

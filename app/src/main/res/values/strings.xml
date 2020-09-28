@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">LatifiArchitecture</string>
+
+    <string name="VariableTest">VariableTest</string>
 </resources>

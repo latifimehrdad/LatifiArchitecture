@@ -29,7 +29,7 @@ import ir.mlcode.latifiarchitecturelibrary.utility.DownloadTask;
 import ir.mlcode.latifiarchitecturelibrary.utility.StaticValues;
 import ir.mlcode.latifiarchitecturelibrary.viewmodels.VM_LatifiUpdate;
 
-public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.getActionFromObservable {
+public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.fragmentActions {
 
 
     private VM_LatifiUpdate vm_Latifi_update;
@@ -193,5 +193,10 @@ public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.getActionFro
     }
     //______________________________________________________________________________________________ actionWhenFailureRequest
 
+
+    @Override
+    public void OnBackPress() {
+
+    }
 
 }

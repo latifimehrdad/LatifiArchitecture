@@ -8,6 +8,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.drawable.ProgressBarDrawable;
+import com.facebook.drawee.generic.RoundingParams;
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Date;
@@ -589,6 +593,38 @@ public class ApplicationUtility {
         return Boolean.FALSE;
     }
     //______________________________________________________________________________________________ kabise
+
+
+    //______________________________________________________________________________________________ setRoundCircleImage
+    public void setRoundCircleImage(SimpleDraweeView simpleDraweeView, int borderColor, float borderWidth) {
+        RoundingParams roundingParams = RoundingParams.fromCornersRadius(5f);
+        roundingParams.setBorder(borderColor, borderWidth);
+        roundingParams.setRoundAsCircle(true);
+        simpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
+    }
+    //______________________________________________________________________________________________ setRoundCircleImage
+
+
+    //______________________________________________________________________________________________ setRoundImage
+    public void setRoundImage(SimpleDraweeView simpleDraweeView, int borderColor, float borderWidth, float topLeft, float topRight, float bottomLeft, float bottomRight) {
+        RoundingParams roundingParams = RoundingParams.fromCornersRadius(5f);
+        roundingParams.setBorder(borderColor, borderWidth);
+        roundingParams.setCornersRadii(topLeft, topRight, bottomRight, bottomLeft);
+        simpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
+    }
+    //______________________________________________________________________________________________ setRoundImage
+
+
+    //______________________________________________________________________________________________ setProgressBarForLoadImage
+    public void setProgressBarForLoadImage(SimpleDraweeView simpleDraweeView, int barColor, int backColor, int radius) {
+        ProgressBarDrawable progressBarDrawable = new ProgressBarDrawable();
+        progressBarDrawable.setColor(barColor);
+        progressBarDrawable.setBackgroundColor(backColor);
+        progressBarDrawable.setRadius(radius);
+        simpleDraweeView.getHierarchy().setProgressBarImage(progressBarDrawable);
+    }
+    //______________________________________________________________________________________________ setProgressBarForLoadImage
+
 
 
 }

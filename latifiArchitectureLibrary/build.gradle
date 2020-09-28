@@ -8,7 +8,7 @@ android {
         minSdkVersion 18
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -35,6 +35,9 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     api 'io.reactivex.rxjava2:rxjava:2.2.10'
     api "com.jakewharton.rxbinding2:rxbinding:2.0.0"
@@ -60,14 +63,11 @@ dependencies {
 
     api 'com.android.support:multidex:1.0.3'
 
-    api 'com.jakewharton:butterknife:10.1.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
-
     api 'io.github.inflationx:calligraphy3:3.1.1'
 
     api 'com.intuit.sdp:sdp-android:1.0.5'
 
     api 'com.yangping:ypwaveview:1.0.3'
 
-
+    api 'com.facebook.fresco:fresco:2.3.0'
 }

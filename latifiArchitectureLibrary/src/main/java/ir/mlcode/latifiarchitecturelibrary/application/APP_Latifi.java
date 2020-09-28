@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 
 import androidx.multidex.MultiDexApplication;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.cache.memory.BaseMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -110,6 +111,7 @@ public class APP_Latifi extends MultiDexApplication {
     //______________________________________________________________________________________________ setContext
     public void setContext(Context context) {
         this.context = context;
+        Fresco.initialize(context);
         configurationUtilityComponent();
         configurationImageLoader();
     }
