@@ -67,7 +67,7 @@ dependencies {
 
     api 'com.intuit.sdp:sdp-android:1.0.5'
 
-    api 'com.yangping:ypwaveview:1.0.3'
-
     api 'com.facebook.fresco:fresco:2.3.0'
+
+    implementation "androidx.exifinterface:exifinterface:1.3.0"
 }

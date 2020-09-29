@@ -17,8 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
-import com.yangp.ypwaveview.YPWaveView;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +25,7 @@ import ir.mlcode.latifiarchitecturelibrary.R;
 import ir.mlcode.latifiarchitecturelibrary.databinding.FrLatifiUpdateBinding;
 import ir.mlcode.latifiarchitecturelibrary.utility.DownloadTask;
 import ir.mlcode.latifiarchitecturelibrary.utility.StaticValues;
+import ir.mlcode.latifiarchitecturelibrary.utility.wave.LatifiWaveProgressView;
 import ir.mlcode.latifiarchitecturelibrary.viewmodels.VM_LatifiUpdate;
 
 public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.fragmentActions {
@@ -41,7 +40,7 @@ public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.fragmentActi
 
     TextView TextViewProgress;
     Button ButtonInstall;
-    YPWaveView yPWaveView;
+    LatifiWaveProgressView yPWaveProgressView;
 
 
     //______________________________________________________________________________________________ onCreateView
@@ -59,11 +58,11 @@ public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.fragmentActi
             setView(binding.getRoot());
             TextViewProgress = getView().findViewById(R.id.TextViewProgress);
             ButtonInstall = getView().findViewById(R.id.ButtonInstall);
-            yPWaveView = getView().findViewById(R.id.yPWaveView);
+            yPWaveProgressView = getView().findViewById(R.id.yPWaveView);
 
             if (getContext() != null)
                 TextViewProgress.setText(getContext().getResources().getString(R.string.PleaseWait));
-            yPWaveView.setProgress(0);
+            yPWaveProgressView.setProgress(0);
             ButtonInstall.setVisibility(View.GONE);
             setOnClick();
             init();
@@ -153,17 +152,17 @@ public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.fragmentActi
         }
 
         if (action.equals(StaticValues.ML_FileDownloading)) {
-            yPWaveView.setProgress(0);
+            yPWaveProgressView.setProgress(0);
             if (getContext() != null)
                 TextViewProgress.setText(getContext().getResources().getString(R.string.FileDownloaded));
             return;
         }
 
         if (action.equals(StaticValues.ML_FileDownloaded)) {
-            yPWaveView.setProgress(0);
+            yPWaveProgressView.setProgress(0);
             ButtonInstall.setVisibility(View.VISIBLE);
             TextViewProgress.setVisibility(View.GONE);
-            yPWaveView.setVisibility(View.GONE);
+            yPWaveProgressView.setVisibility(View.GONE);
             if (getContext() != null)
                 TextViewProgress.setText(getContext().getResources().getString(R.string.FileDownloaded));
         }
@@ -178,7 +177,7 @@ public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.fragmentActi
         handlerDownload.postDelayed(new Runnable() {
             @Override
             public void run() {
-                yPWaveView.setProgress(DownloadTask.progressDownload);
+                yPWaveProgressView.setProgress(DownloadTask.progressDownload);
                 if (DownloadTask.progressDownload < 100)
                     handlerDownload.postDelayed(this, 500);
             }

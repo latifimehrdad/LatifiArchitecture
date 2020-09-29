@@ -17,7 +17,19 @@ import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import ir.mlcode.latifiarchitecturelibrary.models.MD_GregorianToSun;
+
 public class ApplicationUtility {
+
+
+    private Validations validations;
+
+
+    //______________________________________________________________________________________________ ApplicationUtility
+    public ApplicationUtility() {
+        validations = new Validations();
+    }
+    //______________________________________________________________________________________________ ApplicationUtility
 
 
     //______________________________________________________________________________________________ persianToEnglish
@@ -626,5 +638,10 @@ public class ApplicationUtility {
     //______________________________________________________________________________________________ setProgressBarForLoadImage
 
 
+    //______________________________________________________________________________________________ getValidations
+    public Validations getValidations() {
+        return validations;
+    }
+    //______________________________________________________________________________________________ getValidations
 
 }

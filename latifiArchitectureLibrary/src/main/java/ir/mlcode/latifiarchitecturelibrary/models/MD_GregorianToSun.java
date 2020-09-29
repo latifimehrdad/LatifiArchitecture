@@ -1,4 +1,4 @@
-package ir.mlcode.latifiarchitecturelibrary.utility;
+package ir.mlcode.latifiarchitecturelibrary.models;
 
 public class MD_GregorianToSun {
 

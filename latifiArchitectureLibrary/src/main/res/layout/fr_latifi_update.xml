@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
 
-        <com.yangp.ypwaveview.YPWaveView
+        <ir.mlcode.latifiarchitecturelibrary.utility.wave.LatifiWaveProgressView
             android:id="@+id/yPWaveView"
             android:layout_width="@dimen/_150sdp"
             android:layout_height="@dimen/_150sdp"

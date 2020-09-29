@@ -14,4 +14,6 @@
     <string name="ML_UpdateFileName">ML_UpdateFileName></string>
     <string name="FileDownloaded">پایان بارگیری فایل</string>
 
+    <string name="pick_image_intent_chooser_title">برش تصویر</string>
+
 </resources>
