@@ -139,7 +139,6 @@ public class FR_Latifi extends Fragment {
     //______________________________________________________________________________________________ setPublishSubjectFromObservable
     public void setPublishSubjectFromObservable(
             fragmentActions fragmentActions,
-            PublishSubject<Byte> publishSubject,
             VM_Latifi vm_latifi,
             int svg_error,
             int svg_ok) {
@@ -150,7 +149,7 @@ public class FR_Latifi extends Fragment {
         this.vm_latifi = vm_latifi;
         this.svg_error = svg_error;
         this.svg_ok = svg_ok;
-        setObserverToObservable(publishSubject);
+        setObserverToObservable(vm_latifi.getPublishSubject());
     }
     //______________________________________________________________________________________________ setPublishSubjectFromObservable
 
@@ -158,7 +157,6 @@ public class FR_Latifi extends Fragment {
     //______________________________________________________________________________________________ setPublishSubjectFromObservable
     public void setPublishSubjectFromObservable(
             fragmentActions fragmentActions,
-            PublishSubject<Byte> publishSubject,
             VM_Latifi vm_latifi) {
         this.fragmentActions = fragmentActions;
         if (disposableObserver != null)
@@ -167,7 +165,7 @@ public class FR_Latifi extends Fragment {
         this.vm_latifi = vm_latifi;
         this.svg_error = R.drawable.svg_warning;
         this.svg_ok = R.drawable.svg_checked;
-        setObserverToObservable(publishSubject);
+        setObserverToObservable(vm_latifi.getPublishSubject());
     }
     //______________________________________________________________________________________________ setPublishSubjectFromObservable
 
@@ -204,16 +202,22 @@ public class FR_Latifi extends Fragment {
     private void actionHandler(Byte action) {
         if (getContext() != null) {
             getContext().runOnUiThread(() -> {
-                fragmentActions.getActionFromObservable(action);
 
-                if (action.equals(StaticValues.ML_DialogClose))
-                    return;
 
-                if (vm_latifi.getResponseMessage() == null)
+                if (action.equals(StaticValues.ML_DialogClose)) {
+                    fragmentActions.getActionFromObservable(action);
                     return;
+                }
 
-                if (vm_latifi.getResponseMessage().equalsIgnoreCase(""))
+                if (vm_latifi.getResponseMessage() == null) {
+                    fragmentActions.getActionFromObservable(action);
                     return;
+                }
+
+                if (vm_latifi.getResponseMessage().equalsIgnoreCase("")) {
+                    fragmentActions.getActionFromObservable(action);
+                    return;
+                }
 
                 if ((action.equals(StaticValues.ML_RequestCancel))
                         || (action.equals(StaticValues.ML_ResponseError))
@@ -230,6 +234,7 @@ public class FR_Latifi extends Fragment {
                             , getResources().getColor(R.color.mlWhite),
                             getResources().getDrawable(svg_ok),
                             getResources().getColor(R.color.colorPrimaryDark));
+                    fragmentActions.getActionFromObservable(action);
                 }
             });
         }

@@ -78,7 +78,6 @@ public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.fragmentActi
         super.onStart();
         setPublishSubjectFromObservable(
                 FR_LatifiUpdate.this,
-                vm_Latifi_update.getPublishSubject(),
                 vm_Latifi_update);
         List<String> list = new ArrayList<>();
         list.add(Manifest.permission.READ_EXTERNAL_STORAGE);
