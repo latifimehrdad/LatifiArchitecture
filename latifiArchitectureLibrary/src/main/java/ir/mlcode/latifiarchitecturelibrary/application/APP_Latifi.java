@@ -15,6 +15,10 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.lang.ref.Reference;
 
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
+import ir.mlcode.latifiarchitecturelibrary.R;
 import ir.mlcode.latifiarchitecturelibrary.daggers.imageloader.DaggerImageLoaderComponent;
 import ir.mlcode.latifiarchitecturelibrary.daggers.imageloader.ImageLoaderComponent;
 import ir.mlcode.latifiarchitecturelibrary.daggers.imageloader.ImageLoaderModule;
@@ -114,8 +118,23 @@ public class APP_Latifi extends MultiDexApplication {
         Fresco.initialize(context);
         configurationUtilityComponent();
         configurationImageLoader();
+        configurationCalligraphy();
     }
     //______________________________________________________________________________________________ setContext
+
+
+    //______________________________________________________________________________________________ configurationCalligraphy
+    private void configurationCalligraphy() {
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setDefaultFontPath("font/iransanslight.ttf")
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
+
+    }
+    //______________________________________________________________________________________________ configurationCalligraphy
 
 
     //______________________________________________________________________________________________ getHost
