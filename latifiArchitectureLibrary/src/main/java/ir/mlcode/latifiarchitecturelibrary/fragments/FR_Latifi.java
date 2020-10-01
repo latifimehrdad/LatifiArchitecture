@@ -382,4 +382,12 @@ public class FR_Latifi extends Fragment {
     //______________________________________________________________________________________________ removeCallBackAndBack
 
 
+
+    //______________________________________________________________________________________________ getNavController
+    public NavController getNavController() {
+        return navController;
+    }
+    //______________________________________________________________________________________________ getNavController
+
+
 }
