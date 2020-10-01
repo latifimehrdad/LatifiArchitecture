@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class FR_Latifi extends Fragment {
     private int svg_error;
     private int svg_ok;
     private OnBackPressedCallback pressedCallback;
+    private NavController navController;
 
 
     //______________________________________________________________________________________________ getActionFromObservable
@@ -149,6 +151,7 @@ public class FR_Latifi extends Fragment {
         this.vm_latifi = vm_latifi;
         this.svg_error = svg_error;
         this.svg_ok = svg_ok;
+        navController = Navigation.findNavController(getView());
         setObserverToObservable(vm_latifi.getPublishSubject());
     }
     //______________________________________________________________________________________________ setPublishSubjectFromObservable
@@ -165,6 +168,7 @@ public class FR_Latifi extends Fragment {
         this.vm_latifi = vm_latifi;
         this.svg_error = R.drawable.svg_warning;
         this.svg_ok = R.drawable.svg_checked;
+        navController = Navigation.findNavController(getView());
         setObserverToObservable(vm_latifi.getPublishSubject());
     }
     //______________________________________________________________________________________________ setPublishSubjectFromObservable

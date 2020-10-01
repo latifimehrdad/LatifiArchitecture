@@ -264,7 +264,6 @@ public class VM_Latifi extends BaseObservable {
             handler.postDelayed(() -> reactionToIncorrectResponse(action), 500);
         else
             handler.postDelayed(() -> publishSubject.onNext(action), 500);
-
     }
     //______________________________________________________________________________________________ sendActionToObservable
 
