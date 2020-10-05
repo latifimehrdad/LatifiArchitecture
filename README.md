@@ -36,7 +36,7 @@ Add the dependency
 
 ```
 dependencies {
-	        implementation 'com.github.latifimehrdad:LatifiArchitecture:1.8'
+	        implementation 'com.github.latifimehrdad:LatifiArchitecture:1.9'
 	}
 ```
 
