@@ -15,4 +15,8 @@
     <color name="mlWave3">#00AAB1</color>
     <color name="mlWave4">#15DF89</color>
 
+    <color name="ML_Transparent">#00000000</color>
+
+    <color name="ML_Toast1">#feca04</color>
+
 </resources>

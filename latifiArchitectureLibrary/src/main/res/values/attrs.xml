@@ -81,4 +81,20 @@
         <attr name="shapePadding" />
     </declare-styleable>
 
+
+    <declare-styleable name="ML_Toast">
+
+        <attr name="toast_Back" format="reference|color" />
+        <attr name="toast_TextColor" format="color"/>
+        <attr name="toast_TextSize" format="dimension"/>
+        <attr name="toast_minWidth" format="dimension"/>
+        <attr name="toast_maxWidth" format="dimension"/>
+        <attr name="fontFamily"/>
+
+        <attr name="toast_imgWidth" format="dimension"  />
+        <attr name="toast_imgHeight" format="dimension"  />
+
+    </declare-styleable>
+
+
 </resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dw_toast_back"
+    android:paddingTop="@dimen/_2sdp"
+    android:paddingBottom="@dimen/_2sdp"
+    android:paddingRight="@dimen/_2sdp">
+
+    <ir.mlcode.latifiarchitecturelibrary.customs.ML_Toast
+        android:id="@+id/ml_Toast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:toast_Back="@drawable/dw_toast_main_layout"
+        app:toast_imgHeight="@dimen/_25sdp"
+        app:toast_imgWidth="@dimen/_25sdp"
+        app:toast_minWidth="@dimen/_80sdp"
+        app:toast_maxWidth="@dimen/_140sdp"
+        app:toast_TextColor="@color/mlWhite"
+        app:toast_TextSize="@dimen/_10sdp"
+        app:fontFamily="sans-serif-light"
+        />
+
+</LinearLayout>

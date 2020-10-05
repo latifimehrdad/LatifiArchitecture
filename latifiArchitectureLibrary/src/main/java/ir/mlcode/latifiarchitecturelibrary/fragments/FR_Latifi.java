@@ -8,14 +8,13 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -30,6 +29,7 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 import ir.mlcode.latifiarchitecturelibrary.R;
+import ir.mlcode.latifiarchitecturelibrary.customs.ML_Toast;
 import ir.mlcode.latifiarchitecturelibrary.dialogs.DialogMessage;
 import ir.mlcode.latifiarchitecturelibrary.utility.ApplicationUtility;
 import ir.mlcode.latifiarchitecturelibrary.utility.StaticValues;
@@ -46,6 +46,7 @@ public class FR_Latifi extends Fragment {
     private int svg_ok;
     private OnBackPressedCallback pressedCallback;
     private NavController navController;
+    public static ConstraintLayout constraintLayout;
 
 
     //______________________________________________________________________________________________ getActionFromObservable
@@ -227,14 +228,14 @@ public class FR_Latifi extends Fragment {
                         || (action.equals(StaticValues.ML_ResponseError))
                         || (action.equals(StaticValues.ML_ResponseFailure))
                         || (action.equals(StaticValues.ML_InternetAccessFailed))) {
-                    showMessageDialog(vm_latifi.getResponseMessage(),
+                    showToast(vm_latifi.getResponseMessage(),
                             getResources().getColor(R.color.mlHarmony),
                             getResources().getDrawable(svg_error),
                             getResources().getColor(R.color.mlCollectRight1));
                     fragmentActions.actionWhenFailureRequest();
                     return;
                 } else {
-                    showMessageDialog(vm_latifi.getResponseMessage()
+                    showToast(vm_latifi.getResponseMessage()
                             , getResources().getColor(R.color.mlWhite),
                             getResources().getDrawable(svg_ok),
                             getResources().getColor(R.color.colorPrimaryDark));
@@ -244,6 +245,16 @@ public class FR_Latifi extends Fragment {
         }
     }
     //______________________________________________________________________________________________ actionHandler
+
+
+    //______________________________________________________________________________________________ showToast
+    public void showToast(String message, int color, Drawable icon, int tintColor) {
+
+        ML_Toast.showToast(getContext(), constraintLayout, message, icon, tintColor);
+    }
+    //______________________________________________________________________________________________ showToast
+
+
 
 
     //______________________________________________________________________________________________ showMessageDialog
@@ -256,6 +267,7 @@ public class FR_Latifi extends Fragment {
         }
     }
     //______________________________________________________________________________________________ showMessageDialog
+
 
 
     //______________________________________________________________________________________________ hideKeyboard
