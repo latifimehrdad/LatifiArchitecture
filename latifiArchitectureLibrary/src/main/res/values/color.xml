@@ -18,5 +18,6 @@
     <color name="ML_Transparent">#00000000</color>
 
     <color name="ML_Toast1">#feca04</color>
+    <color name="mlToastBack">#303030</color>
 
 </resources>
