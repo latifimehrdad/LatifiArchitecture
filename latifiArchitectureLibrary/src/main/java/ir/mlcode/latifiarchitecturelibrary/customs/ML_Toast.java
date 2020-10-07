@@ -122,6 +122,19 @@ public class ML_Toast extends LinearLayout {
         ML_Toast ml_toast = view.findViewById(R.id.ml_Toast);
         ml_toast.mackToast(message, icon, iconTintColor);
         view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_in_left));
+        Handler handlerShow = new Handler();
+        handlerShow.postDelayed(() -> {
+            show(context, viewParent, view, message);
+        }, 1000);
+
+    }
+    //______________________________________________________________________________________________ showToast
+
+
+
+    //______________________________________________________________________________________________ show
+    private static void show(Context context, ConstraintLayout viewParent, View view, String message) {
+
         viewParent.addView(view);
         ConstraintLayout.LayoutParams parent = (ConstraintLayout.LayoutParams) view.getLayoutParams();
         parent.leftToRight = viewParent.getId();
@@ -140,7 +153,8 @@ public class ML_Toast extends LinearLayout {
             view.setVisibility(GONE);
         }, delay);
     }
-    //______________________________________________________________________________________________ showToast
+    //______________________________________________________________________________________________ show
+
 
 
 }
