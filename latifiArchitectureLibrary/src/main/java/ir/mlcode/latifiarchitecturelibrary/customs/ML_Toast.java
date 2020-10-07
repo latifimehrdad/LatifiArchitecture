@@ -125,7 +125,7 @@ public class ML_Toast extends LinearLayout {
         Handler handlerShow = new Handler();
         handlerShow.postDelayed(() -> {
             show(context, viewParent, view, message);
-        }, 1000);
+        }, 700);
 
     }
     //______________________________________________________________________________________________ showToast
