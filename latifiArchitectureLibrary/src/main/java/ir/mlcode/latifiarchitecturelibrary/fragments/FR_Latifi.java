@@ -375,14 +375,14 @@ public class FR_Latifi extends Fragment {
     //______________________________________________________________________________________________ setVariableToNavigation
 
 
-    //______________________________________________________________________________________________ getVariableToNavigation
-    public String getVariableToNavigation(String saveKey) {
+    //______________________________________________________________________________________________ getVariableFromNavigation
+    public String getVariableFromNavigation(String saveKey) {
         if (getView() != null)
             return Navigation.findNavController(getView()).getCurrentBackStackEntry().getSavedStateHandle().get(saveKey);
         else
             return null;
     }
-    //______________________________________________________________________________________________ getVariableToNavigation
+    //______________________________________________________________________________________________ getVariableFromNavigation
 
 
     //______________________________________________________________________________________________ removeCallBackAndBack

@@ -205,7 +205,6 @@ public class VM_Latifi extends BaseObservable {
         if (primaryCall != null) {
             setResponseMessage("");
             primaryCall.cancel();
-            primaryCall = null;
         }
         getPublishSubject().onNext(StaticValues.ML_RequestCancel);
     }
