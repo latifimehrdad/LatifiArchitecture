@@ -118,7 +118,7 @@ public class APP_Latifi extends MultiDexApplication {
         Fresco.initialize(context);
         configurationUtilityComponent();
         configurationImageLoader();
-        configurationCalligraphy();
+        //configurationCalligraphy();
     }
     //______________________________________________________________________________________________ setContext
 
@@ -128,7 +128,7 @@ public class APP_Latifi extends MultiDexApplication {
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(new CalligraphyInterceptor(
                         new CalligraphyConfig.Builder()
-                                .setDefaultFontPath("font/vazir.ttf")
+                                .setDefaultFontPath("font/vazir_normal.ttf")
                                 .setFontAttrId(R.attr.fontPath)
                                 .build()))
                 .build());

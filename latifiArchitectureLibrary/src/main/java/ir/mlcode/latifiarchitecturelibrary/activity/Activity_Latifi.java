@@ -12,8 +12,6 @@ public class Activity_Latifi extends AppCompatActivity {
     //______________________________________________________________________________________________ attachBaseContext
     public void attachBaseContext(Context newBase) {
         super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
-
-
     }
     //______________________________________________________________________________________________ attachBaseContext
 
