@@ -118,7 +118,7 @@ public class APP_Latifi extends MultiDexApplication {
         Fresco.initialize(context);
         configurationUtilityComponent();
         configurationImageLoader();
-        //configurationCalligraphy();
+        configurationCalligraphy();
     }
     //______________________________________________________________________________________________ setContext
 
