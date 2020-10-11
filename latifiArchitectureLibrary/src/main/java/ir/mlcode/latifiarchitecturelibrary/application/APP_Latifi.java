@@ -128,7 +128,7 @@ public class APP_Latifi extends MultiDexApplication {
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(new CalligraphyInterceptor(
                         new CalligraphyConfig.Builder()
-                                .setDefaultFontPath("font/iransanslight.ttf")
+                                .setDefaultFontPath("font/vazir.ttf")
                                 .setFontAttrId(R.attr.fontPath)
                                 .build()))
                 .build());

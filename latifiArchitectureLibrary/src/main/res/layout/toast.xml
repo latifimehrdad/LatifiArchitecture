@@ -20,7 +20,7 @@
         app:toast_maxWidth="@dimen/_140sdp"
         app:toast_TextColor="@color/mlWhite"
         app:toast_TextSize="@dimen/_10sdp"
-        app:fontFamily="@font/iransanslight"
+        app:fontFamily="@font/vazir"
         />
 
 </LinearLayout>

@@ -8,7 +8,6 @@
     </data>
 
     <LinearLayout
-        xmlns:custom="http://schemas.android.com/apk/res-auto"
         android:id="@+id/layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
