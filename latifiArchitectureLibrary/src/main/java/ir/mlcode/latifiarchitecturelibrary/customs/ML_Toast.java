@@ -131,7 +131,6 @@ public class ML_Toast extends LinearLayout {
     //______________________________________________________________________________________________ showToast
 
 
-
     //______________________________________________________________________________________________ show
     private static void show(Context context, ConstraintLayout viewParent, View view, String message) {
 
@@ -143,10 +142,11 @@ public class ML_Toast extends LinearLayout {
 
         int delay;
         int titleLength = message.length();
-        if (titleLength > 10)
-            titleLength = titleLength / 10;
+        if (titleLength > 8)
+            titleLength = titleLength / 8;
         delay = 1000 * titleLength;
-        delay = delay + 1500;
+        if (delay < 2000)
+            delay = delay + 1500;
         Handler handler = new Handler();
         handler.postDelayed(() -> {
             view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_out_left));
@@ -154,7 +154,6 @@ public class ML_Toast extends LinearLayout {
         }, delay);
     }
     //______________________________________________________________________________________________ show
-
 
 
 }
