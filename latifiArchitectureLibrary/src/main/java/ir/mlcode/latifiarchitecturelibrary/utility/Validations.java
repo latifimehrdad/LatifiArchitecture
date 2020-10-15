@@ -59,4 +59,23 @@ public class Validations {
 
     }
     //______________________________________________________________________________________________ emailValidation
+
+
+
+    //______________________________________________________________________________________________ nationalValidation
+    public boolean nationalValidation(String national) {
+
+        if (national == null)
+            return false;
+
+        if (national.isEmpty())
+            return false;
+
+        if (national.length() != 10)
+            return false;
+
+        return true;
+    }
+    //______________________________________________________________________________________________ nationalValidation
+
 }
