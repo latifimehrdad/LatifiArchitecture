@@ -37,6 +37,7 @@ import ir.mlcode.latifiarchitecturelibrary.daggers.utility.UtilityComponent;
 import ir.mlcode.latifiarchitecturelibrary.daggers.utility.UtilityModule;
 import ir.mlcode.latifiarchitecturelibrary.models.MD_Message;
 import ir.mlcode.latifiarchitecturelibrary.models.MD_ResponsePrimary;
+import ir.mlcode.latifiarchitecturelibrary.models.MR_Primary;
 import ir.mlcode.latifiarchitecturelibrary.utility.ApplicationUtility;
 import ir.mlcode.latifiarchitecturelibrary.utility.StaticValues;
 import retrofit2.Call;
@@ -162,6 +163,22 @@ public class VM_Latifi extends BaseObservable {
         }
     }
     //______________________________________________________________________________________________ getResponseMessage
+
+
+
+    //______________________________________________________________________________________________ getResponseMessages
+    public String getResponseMessages(Response<MR_Primary> response) {
+        StringBuilder result = new StringBuilder();
+        if (response.body().getMessages() != null && response.body().getMessages().size() > 0)
+            for (String message : response.body().getMessages())
+                result.append(message).append(System.getProperty("line.separator"));
+        else
+            result = new StringBuilder(response.body().getMessage());
+
+        return result.toString();
+    }
+    //______________________________________________________________________________________________ getResponseMessages
+
 
 
     //______________________________________________________________________________________________ reactionToIncorrectResponse
