@@ -167,13 +167,13 @@ public class VM_Latifi extends BaseObservable {
 
 
     //______________________________________________________________________________________________ getResponseMessages
-    public String getResponseMessages(Response<MR_Primary> response) {
+    public String getResponseMessages(MR_Primary response) {
         StringBuilder result = new StringBuilder();
-        if (response.body().getMessages() != null && response.body().getMessages().size() > 0)
-            for (String message : response.body().getMessages())
+        if (response.getMessages() != null && response.getMessages().size() > 0)
+            for (String message : response.getMessages())
                 result.append(message).append(System.getProperty("line.separator"));
         else
-            result = new StringBuilder(response.body().getMessage());
+            result = new StringBuilder(response.getMessage());
 
         return result.toString();
     }
