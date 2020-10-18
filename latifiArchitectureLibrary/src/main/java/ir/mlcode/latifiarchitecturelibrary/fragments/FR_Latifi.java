@@ -238,7 +238,7 @@ public class FR_Latifi extends Fragment {
                     showToast(vm_latifi.getResponseMessage()
                             , getResources().getColor(R.color.mlWhite),
                             getResources().getDrawable(svg_ok),
-                            getResources().getColor(R.color.colorPrimaryDark));
+                            getResources().getColor(R.color.mlWave4));
                     fragmentActions.getActionFromObservable(action);
                 }
             });
