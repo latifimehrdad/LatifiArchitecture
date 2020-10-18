@@ -279,7 +279,7 @@
         <attr name="connectBack" format="reference|color" />
         <attr name="waitBack" format="reference|color" />
 
-        <attr name="textColor" format="color" />
+        <attr name="textColor"/>
         <attr name="textValue" format="string" localization="suggested" />
         <attr name="textValueSize" format="dimension" />
         <attr name="waitText" format="string" />
