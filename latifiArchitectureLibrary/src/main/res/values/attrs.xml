@@ -127,6 +127,7 @@
             <enum name="mobile" value="1" />
             <enum name="text" value="2" />
             <enum name="email" value="3" />
+            <enum name="national" value="4" />
         </attr>
         <attr name="inputTypeEdit">
             <!-- There is no content type.  The text is not editable. -->

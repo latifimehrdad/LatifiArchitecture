@@ -375,6 +375,10 @@ public class ML_EditText extends LinearLayout {
             case 3://email
                 result = validations.emailValidation(getEditText().getText().toString());
                 break;
+
+            case 4://national
+                result = validations.nationalValidation(getEditText().getText().toString());
+                break;
         }
 
         return result;
