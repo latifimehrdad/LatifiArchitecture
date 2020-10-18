@@ -8,7 +8,7 @@ android {
         minSdkVersion 18
         targetSdkVersion 30
         versionCode 1
-        versionName "1.25"
+        versionName "1.27"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -70,6 +70,8 @@ dependencies {
     api 'com.intuit.sdp:sdp-android:1.0.5'
 
     api 'com.facebook.fresco:fresco:2.3.0'
+
+    api 'com.github.Cutta:GifView:1.1'
 
     implementation "androidx.exifinterface:exifinterface:1.3.0"
 }

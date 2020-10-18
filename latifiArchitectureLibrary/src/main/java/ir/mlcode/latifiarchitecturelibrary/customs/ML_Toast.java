@@ -144,6 +144,8 @@ public class ML_Toast extends LinearLayout {
         int titleLength = message.length();
         if (titleLength > 8)
             titleLength = titleLength / 8;
+        else
+            titleLength = 1;
         delay = 1000 * titleLength;
         if (delay < 2000)
             delay = delay + 1500;
