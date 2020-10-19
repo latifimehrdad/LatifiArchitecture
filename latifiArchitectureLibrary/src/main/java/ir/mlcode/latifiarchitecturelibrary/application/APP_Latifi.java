@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import androidx.multidex.MultiDexApplication;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.google.gson.Gson;
 import com.nostra13.universalimageloader.cache.memory.BaseMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -35,7 +36,9 @@ public class APP_Latifi extends MultiDexApplication {
     private UtilityComponent utilityComponent;
     private ImageLoaderComponent imageLoaderComponent;
     private Context context;
-    public String Host;
+    private String Host;
+    private Gson gson;
+
 
 
     //______________________________________________________________________________________________ onCreate
@@ -57,7 +60,7 @@ public class APP_Latifi extends MultiDexApplication {
     private void configurationRetrofitComponent() {
         retrofitComponent = DaggerRetrofitComponent
                 .builder()
-                .retrofitModule(new RetrofitModule(getContext(), getHost()))
+                .retrofitModule(new RetrofitModule(getContext(), getHost(), getGson()))
                 .build();
     }
     //______________________________________________________________________________________________ configurationRetrofitComponent
@@ -150,6 +153,21 @@ public class APP_Latifi extends MultiDexApplication {
         configurationRetrofitComponent();
     }
     //______________________________________________________________________________________________ setHost
+
+
+    //______________________________________________________________________________________________ getGson
+    public Gson getGson() {
+        return gson;
+    }
+    //______________________________________________________________________________________________ getGson
+
+
+    //______________________________________________________________________________________________ setGson
+    public void setGson(Gson gson) {
+        this.gson = gson;
+    }
+    //______________________________________________________________________________________________ setGson
+
 
 
     //______________________________________________________________________________________________ getRetrofitComponent

@@ -23,10 +23,12 @@ public class RetrofitModule {
 
     private Context context;
     private String Host;
+    private Gson gson;
 
-    public RetrofitModule(Context context, String Host) {
+    public RetrofitModule(Context context, String Host, Gson gson) {
         this.context = context;
         this.Host = Host;
+        this.gson = gson;
     }
 
 
@@ -34,14 +36,14 @@ public class RetrofitModule {
     @DaggerScope
     public retrofit2.Retrofit getRetrofit(OkHttpClient okHttpClient) {
 
-        Gson gson = new GsonBuilder()
+/*        Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
 
-//        Gson gson = new GsonBuilder()
-//                .setDateFormat("yyyy-MM-dd'T'hh:mm:ss")
-////                .setDateFormat("E, dd MMM yyyy HH:mm:ss")
-//                .create();
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'hh:mm:ss")
+//                .setDateFormat("E, dd MMM yyyy HH:mm:ss")
+                .create();*/
 
         return new retrofit2.Retrofit.Builder()
                 .baseUrl(Host)
