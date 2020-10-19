@@ -365,31 +365,31 @@ public class ML_EditText extends LinearLayout {
                 break;
 
             case 1://mobile
-                if (getEditText().getText().toString() == null)
-                    return false;
-                else
+                if (editable)
                     result = validations.mobileValidation(getEditText().getText().toString());
+                else
+                    result = validations.mobileValidation(getTextView().getText().toString());
                 break;
 
             case 2://text
-                if (getEditText().getText().toString() == null)
-                    return false;
-                else
+                if (editable)
                     result = validations.textValidation(getEditText().getText().toString());
+                else
+                    result = validations.textValidation(getTextView().getText().toString());
                 break;
 
             case 3://email
-                if (getEditText().getText().toString() == null)
-                    return false;
-                else
+                if (editable)
                     result = validations.emailValidation(getEditText().getText().toString());
+                else
+                    result = validations.emailValidation(getTextView().getText().toString());
                 break;
 
             case 4://national
-                if (getEditText().getText().toString() == null)
-                    return false;
-                else
+                if (editable)
                     result = validations.nationalValidation(getEditText().getText().toString());
+                else
+                    result = validations.nationalValidation(getTextView().getText().toString());
                 break;
         }
 
