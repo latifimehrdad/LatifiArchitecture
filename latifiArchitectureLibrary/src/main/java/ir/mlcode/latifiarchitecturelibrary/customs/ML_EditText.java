@@ -162,7 +162,7 @@ public class ML_EditText extends LinearLayout {
         textView.setLayoutParams(params);
         textView.setPadding(10, 2, 10, 2);
         textView.setMaxLines(textMaxLine);
-        textView.setLineSpacing(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5.0f,  getResources().getDisplayMetrics()), 1.0f);
+        textView.setLineSpacing(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5.0f, getResources().getDisplayMetrics()), 1.0f);
         if (fontFamilyId > 0)
             textView.setTypeface(ResourcesCompat.getFont(getContext(), fontFamilyId));
         addView(textView, params);
@@ -365,19 +365,31 @@ public class ML_EditText extends LinearLayout {
                 break;
 
             case 1://mobile
-                result = validations.mobileValidation(getEditText().getText().toString());
+                if (getEditText().getText().toString() == null)
+                    return false;
+                else
+                    result = validations.mobileValidation(getEditText().getText().toString());
                 break;
 
             case 2://text
-                result = validations.textValidation(getEditText().getText().toString());
+                if (getEditText().getText().toString() == null)
+                    return false;
+                else
+                    result = validations.textValidation(getEditText().getText().toString());
                 break;
 
             case 3://email
-                result = validations.emailValidation(getEditText().getText().toString());
+                if (getEditText().getText().toString() == null)
+                    return false;
+                else
+                    result = validations.emailValidation(getEditText().getText().toString());
                 break;
 
             case 4://national
-                result = validations.nationalValidation(getEditText().getText().toString());
+                if (getEditText().getText().toString() == null)
+                    return false;
+                else
+                    result = validations.nationalValidation(getEditText().getText().toString());
                 break;
         }
 
