@@ -324,13 +324,19 @@ public class ML_EditText extends LinearLayout {
 
         if (view.text == null) {
             view.text = newValue;
-            view.getEditText().setText(view.text);
+            if (view.editable)
+                view.getEditText().setText(view.text);
+            else
+                view.getTextView().setText(view.text);
             return;
         }
 
         if (!view.text.equalsIgnoreCase(newValue)) {
             view.text = newValue;
-            view.getEditText().setText(view.text);
+            if (view.editable)
+                view.getEditText().setText(view.text);
+            else
+                view.getTextView().setText(view.text);
         }
     }
     //______________________________________________________________________________________________ setText
@@ -340,7 +346,10 @@ public class ML_EditText extends LinearLayout {
     @InverseBindingAdapter(attribute = "text")
     public static String getText(ML_EditText view) {
         if (view != null)
-            view.text = view.getEditText().getText().toString();
+            if (view.editable)
+                view.text = view.getEditText().getText().toString();
+            else
+                view.text = view.getTextView().getText().toString();
         return view.getText();
     }
     //______________________________________________________________________________________________ setText
