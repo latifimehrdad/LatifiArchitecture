@@ -148,8 +148,9 @@ public class APP_Latifi extends MultiDexApplication {
 
 
     //______________________________________________________________________________________________ setHost
-    public void setHost(String host) {
+    public void setHost(String host, Gson gson) {
         Host = host;
+        this.gson = gson;
         configurationRetrofitComponent();
     }
     //______________________________________________________________________________________________ setHost
@@ -160,13 +161,6 @@ public class APP_Latifi extends MultiDexApplication {
         return gson;
     }
     //______________________________________________________________________________________________ getGson
-
-
-    //______________________________________________________________________________________________ setGson
-    public void setGson(Gson gson) {
-        this.gson = gson;
-    }
-    //______________________________________________________________________________________________ setGson
 
 
 
