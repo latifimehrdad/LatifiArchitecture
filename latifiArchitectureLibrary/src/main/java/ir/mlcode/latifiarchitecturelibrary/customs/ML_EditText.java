@@ -30,6 +30,7 @@ import ir.mlcode.latifiarchitecturelibrary.utility.Validations;
 public class ML_EditText extends LinearLayout {
 
     private Validations validations;
+    private Object additionalValue;
 
     private Context context;
     private EditText editText;
@@ -261,6 +262,21 @@ public class ML_EditText extends LinearLayout {
     //______________________________________________________________________________________________ getText
 
 
+    //______________________________________________________________________________________________ getTextByLine
+    public String getTextByLine(int line) {
+        if (editable) {
+            int start = getEditText().getLayout().getLineStart(1);
+            int end = getEditText().getLayout().getLineEnd(1);
+            return getText().substring(start, end);
+        } else {
+            int start = getTextView().getLayout().getLineStart(1);
+            int end = getTextView().getLayout().getLineEnd(1);
+            return getText().substring(start, end);
+        }
+    }
+    //______________________________________________________________________________________________ getTextByLine
+
+
     //______________________________________________________________________________________________ getEditText
     public EditText getEditText() {
         return editText;
@@ -410,6 +426,20 @@ public class ML_EditText extends LinearLayout {
 
     }
     //______________________________________________________________________________________________ setText
+
+
+    //______________________________________________________________________________________________ getAdditionalValue
+    public Object getAdditionalValue() {
+        return additionalValue;
+    }
+    //______________________________________________________________________________________________ getAdditionalValue
+
+
+    //______________________________________________________________________________________________ setAdditionalValue
+    public void setAdditionalValue(Object additionalValue) {
+        this.additionalValue = additionalValue;
+    }
+    //______________________________________________________________________________________________ setAdditionalValue
 
 
 }
