@@ -275,7 +275,7 @@ public class ApplicationUtility {
 
 
     //______________________________________________________________________________________________ solarDate_to_gregorian
-    public MD_GregorianDate solarDate_to_gregorian(String solarDate) {
+    public MD_GregorianDate solarDateToGregorian(String solarDate) {
 
         if (solarDate.length() != 10)
             return null;
@@ -310,6 +310,15 @@ public class ApplicationUtility {
     //______________________________________________________________________________________________ solarDate_to_gregorian
 
 
+    //______________________________________________________________________________________________ getFullSolarDateFromSolarDate
+    public String getFullSolarDateFromSolarDate(String solarDate) {
+
+        if (solarDate.length() != 10)
+            return solarDate;
+
+        return gregorianToSolarDate(solarDateToGregorian(solarDate).getDate()).getFullStringSolarDate();
+    }
+    //______________________________________________________________________________________________ getFullSolarDateFromSolarDate
 
 
     //______________________________________________________________________________________________ getMonthTitle

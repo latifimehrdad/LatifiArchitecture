@@ -17,7 +17,7 @@ public class MD_SolarDate {
     }
 
 
-    public String getFullStringSun() {
+    public String getFullStringSolarDate() {
         return getDayOfWeek() + " " + getStringDay() + " " + getMonthOfYear() + " " + getIntYear();
     }
 
