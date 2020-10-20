@@ -62,6 +62,7 @@ public class ML_EditText extends LinearLayout {
     private int textMaxLine;
     private int textMaxLength;
     private boolean editable;
+    private int gravity;
 
 
     //______________________________________________________________________________________________ ML_EditText
@@ -107,6 +108,7 @@ public class ML_EditText extends LinearLayout {
         textMaxLine = ta.getInteger(R.styleable.ML_EditText_textMaxLine, 1);
         textMaxLength = ta.getInteger(R.styleable.ML_EditText_textMaxLength, 1);
         editable = ta.getBoolean(R.styleable.ML_EditText_editable, true);
+        gravity = ta.getInt(R.styleable.ML_EditText_textGravity, 0x11);
 
 
         setBackground(normalBack);
@@ -129,7 +131,7 @@ public class ML_EditText extends LinearLayout {
         editText = new EditText(context);
         LayoutParams params = new LayoutParams(0, LayoutParams.WRAP_CONTENT, 1);
         editText.setTextColor(editTextColor);
-        editText.setGravity(Gravity.CENTER);
+        editText.setGravity(gravity);
         if (inputType > 0)
             editText.setInputType(inputType);
         editText.setHint(editHint);
