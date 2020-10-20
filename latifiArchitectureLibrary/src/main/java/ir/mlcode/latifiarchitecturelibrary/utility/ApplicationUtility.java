@@ -17,7 +17,8 @@ import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import ir.mlcode.latifiarchitecturelibrary.models.MD_GregorianToSun;
+import ir.mlcode.latifiarchitecturelibrary.models.MD_GregorianDate;
+import ir.mlcode.latifiarchitecturelibrary.models.MD_SolarDate;
 
 public class ApplicationUtility {
 
@@ -80,8 +81,8 @@ public class ApplicationUtility {
     //______________________________________________________________________________________________ persianToEnglish
 
 
-    //______________________________________________________________________________________________ gregorianToSun
-    public MD_GregorianToSun gregorianToSun(Date GregorianDate) {
+    //______________________________________________________________________________________________ gregorianToSolarDate
+    public MD_SolarDate gregorianToSolarDate(Date GregorianDate) {
 
         //Type = "FullJalaliNumber = 1367/05/31"
         //Type = "YearJalaliNumber = 1367"
@@ -253,6 +254,69 @@ public class ApplicationUtility {
         }
 
 
+        strMonth = getMonthTitle(month);
+
+        strWeekDay = getDayTitle(WeekDay);
+
+        Locale loc = new Locale("en_US");
+        MD_SolarDate gregorianToSun = new MD_SolarDate();
+        gregorianToSun.setStringYear(String.valueOf(year));
+        gregorianToSun.setIntYear(year);
+        gregorianToSun.setIntMonth(month);
+        gregorianToSun.setIntDay(date);
+        gregorianToSun.setDayOfWeek(strWeekDay);
+        gregorianToSun.setMonthOfYear(strMonth);
+        gregorianToSun.setStringMonth(String.format(loc, "%02d", month));
+        gregorianToSun.setStringDay(String.format(loc, "%02d", date));
+
+        return gregorianToSun;
+    }
+    //______________________________________________________________________________________________ gregorianToSolarDate
+
+
+    //______________________________________________________________________________________________ solarDate_to_gregorian
+    public MD_GregorianDate solarDate_to_gregorian(String solarDate) {
+
+        if (solarDate.length() != 10)
+            return null;
+
+        int jy = Integer.parseInt(solarDate.substring(0,4));
+        int jm = Integer.parseInt(solarDate.substring(5,7));
+        int jd = Integer.parseInt(solarDate.substring(8,10));
+        jy += 1595;
+        int[] out = {
+                0,
+                0,
+                -355668 + (365 * jy) + (((int) (jy / 33)) * 8) + ((int) (((jy % 33) + 3) / 4)) + jd + ((jm < 7) ? (jm - 1) * 31 : ((jm - 7) * 30) + 186)
+        };
+        out[0] = 400 * ((int) (out[2] / 146097));
+        out[2] %= 146097;
+        if (out[2] > 36524) {
+            out[0] += 100 * ((int) (--out[2] / 36524));
+            out[2] %= 36524;
+            if (out[2] >= 365) out[2]++;
+        }
+        out[0] += 4 * ((int) (out[2] / 1461));
+        out[2] %= 1461;
+        if (out[2] > 365) {
+            out[0] += (int) ((out[2] - 1) / 365);
+            out[2] = (out[2] - 1) % 365;
+        }
+        int[] sal_a = { 0, 31, ((out[0] % 4 == 0 && out[0] % 100 != 0) || (out[0] % 400 == 0)) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+        for (out[2]++; out[1] < 13 && out[2] > sal_a[out[1]]; out[1]++) out[2] -= sal_a[out[1]];
+
+        return new MD_GregorianDate(out[0], out[1], out[2]);
+    }
+    //______________________________________________________________________________________________ solarDate_to_gregorian
+
+
+
+
+    //______________________________________________________________________________________________ getMonthTitle
+    public String getMonthTitle(int month) {
+
+        String strMonth = "";
+
         switch (month) {
             case 1:
                 strMonth = "فروردين";
@@ -292,7 +356,18 @@ public class ApplicationUtility {
                 break;
         }
 
-        switch (WeekDay) {
+        return strMonth;
+    }
+    //______________________________________________________________________________________________ getMonthTitle
+
+
+
+    //______________________________________________________________________________________________ getDayTitle
+    public String getDayTitle(int weekDay){
+
+        String strWeekDay = "";
+
+        switch (weekDay) {
 
             case 0:
                 strWeekDay = "يکشنبه";
@@ -317,21 +392,9 @@ public class ApplicationUtility {
                 break;
         }
 
-
-        Locale loc = new Locale("en_US");
-        MD_GregorianToSun gregorianToSun = new MD_GregorianToSun();
-        gregorianToSun.setStringYear(String.valueOf(year));
-        gregorianToSun.setIntYear(year);
-        gregorianToSun.setIntMonth(month);
-        gregorianToSun.setIntDay(date);
-        gregorianToSun.setDayOfWeek(strWeekDay);
-        gregorianToSun.setMonthOfYear(strMonth);
-        gregorianToSun.setStringMonth(String.format(loc, "%02d", month));
-        gregorianToSun.setStringDay(String.format(loc, "%02d", date));
-
-        return gregorianToSun;
+        return strWeekDay;
     }
-    //______________________________________________________________________________________________ gregorianToSun
+    //______________________________________________________________________________________________ getDayTitle
 
 
     //______________________________________________________________________________________________ customToastShow
@@ -421,8 +484,8 @@ public class ApplicationUtility {
     //______________________________________________________________________________________________ splitNumberOfAmount
 
 
-    //______________________________________________________________________________________________ jalaliDatBetween
-    public Integer jalaliDatBetween(String Date1, String Date2, Integer intDate1, Integer intDate2) {
+    //______________________________________________________________________________________________ solarDateBetween
+    public Integer solarDateBetween(String Date1, String Date2, Integer intDate1, Integer intDate2) {
         Integer DateStart;
         Integer DateEnd;
         int c1;
@@ -476,11 +539,11 @@ public class ApplicationUtility {
         }
         return (B + c1) - c2;
     }
-    //______________________________________________________________________________________________ jalaliDatBetween
+    //______________________________________________________________________________________________ solarDateBetween
 
 
-    //______________________________________________________________________________________________ jalaliAddDay
-    public String jalaliAddDay(String Date1, Integer intDate1, int day) {
+    //______________________________________________________________________________________________ solarDateAddDay
+    public String solarDateAddDay(String Date1, Integer intDate1, int day) {
         Integer DateStart;
         if (intDate1 != null) {
             DateStart = intDate1;
@@ -526,11 +589,11 @@ public class ApplicationUtility {
         sb.append(String.format(str2, new Object[]{Integer.valueOf(c1)}));
         return sb.toString();
     }
-    //______________________________________________________________________________________________ jalaliAddDay
+    //______________________________________________________________________________________________ solarDateAddDay
 
 
-    //______________________________________________________________________________________________ jalaliReduceDay
-    public String jalaliReduceDay(String Date1, Integer intDate1, int day) {
+    //______________________________________________________________________________________________ solarDateReduceDay
+    public String solarDateReduceDay(String Date1, Integer intDate1, int day) {
         Integer DateStart;
         if (intDate1 != null) {
             DateStart = intDate1;
@@ -565,7 +628,7 @@ public class ApplicationUtility {
             sb.append("01");
         return sb.toString();
     }
-    //______________________________________________________________________________________________ jalaliReduceDay
+    //______________________________________________________________________________________________ solarDateReduceDay
 
 
     //______________________________________________________________________________________________ switchYear

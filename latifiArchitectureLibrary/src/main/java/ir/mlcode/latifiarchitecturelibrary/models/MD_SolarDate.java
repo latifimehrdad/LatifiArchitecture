@@ -1,6 +1,6 @@
 package ir.mlcode.latifiarchitecturelibrary.models;
 
-public class MD_GregorianToSun {
+public class MD_SolarDate {
 
     private int intYear;
     private int intMonth;
@@ -12,7 +12,7 @@ public class MD_GregorianToSun {
     private String stringYear;
 
 
-    public MD_GregorianToSun() {
+    public MD_SolarDate() {
 
     }
 
