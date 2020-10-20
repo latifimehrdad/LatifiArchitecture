@@ -157,7 +157,7 @@ public class ML_EditText extends LinearLayout {
         textView = new TextView(context);
         LayoutParams params = new LayoutParams(0, LayoutParams.WRAP_CONTENT, 1);
         textView.setTextColor(editTextColor);
-        textView.setGravity(Gravity.CENTER);
+        textView.setGravity(gravity);
         textView.setHint(editHint);
         textView.setText(text);
         textView.setTextSize(textSize);
