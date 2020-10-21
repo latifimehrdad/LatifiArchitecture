@@ -35,6 +35,7 @@ public class ML_EditText extends LinearLayout {
     private Context context;
     private EditText editText;
     private TextView textView;
+    private ImageView imageIcon;
 
     private Drawable normalBack;
     private Drawable emptyBack;
@@ -203,14 +204,22 @@ public class ML_EditText extends LinearLayout {
 
     //______________________________________________________________________________________________ configIcon
     private void configIcon() {
-        ImageView imageView = new ImageView(context);
+        imageIcon = new ImageView(context);
         LayoutParams params = new LayoutParams(imageWidth, imageHeight);
-        imageView.setLayoutParams(params);
-        imageView.setImageDrawable(imageSrc);
-        imageView.setColorFilter(imageTint);
-        addView(imageView, params);
+        imageIcon.setLayoutParams(params);
+        imageIcon.setImageDrawable(imageSrc);
+        imageIcon.setColorFilter(imageTint);
+        addView(imageIcon, params);
     }
     //______________________________________________________________________________________________ configIcon
+
+
+    //______________________________________________________________________________________________ setImageIcon
+    public void setImageIcon(Drawable icon) {
+        imageSrc = icon;
+        imageIcon.setImageDrawable(icon);
+    }
+    //______________________________________________________________________________________________ setImageIcon
 
 
     //______________________________________________________________________________________________ textChangeForChangeBack
@@ -453,4 +462,9 @@ public class ML_EditText extends LinearLayout {
     //______________________________________________________________________________________________ setAdditionalValue
 
 
+    //______________________________________________________________________________________________ getImageIcon
+    public ImageView getImageIcon() {
+        return imageIcon;
+    }
+    //______________________________________________________________________________________________ getImageIcon
 }
