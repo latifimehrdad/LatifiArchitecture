@@ -147,8 +147,8 @@ public class ML_Toast extends LinearLayout {
         else
             titleLength = 1;
         delay = 1000 * titleLength;
-        if (delay < 1000)
-            delay = 2000;
+        if (delay < 1500)
+            delay = 2500;
         Handler handler = new Handler();
         handler.postDelayed(() -> {
             view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_out_left));
