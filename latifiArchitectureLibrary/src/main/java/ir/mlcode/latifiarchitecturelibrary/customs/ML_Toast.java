@@ -32,6 +32,11 @@ public class ML_Toast extends LinearLayout {
 
     private static View view;
 
+    private static Runnable runnable;
+
+    private static Handler handler;
+
+
     private int textColor;
     private int textSize;
     private int fontFamilyId;
@@ -119,33 +124,50 @@ public class ML_Toast extends LinearLayout {
 
     //______________________________________________________________________________________________ showToast
     public static void showToast(Context context, ConstraintLayout viewParent, String message, Drawable icon, int iconTintColor) {
-        if (view == null) {
-            LayoutInflater layoutInflater = LayoutInflater.from(context);
-            view = layoutInflater.inflate(R.layout.toast, null);
-        } else {
-            if (view.getVisibility() == View.VISIBLE)
-                view.setVisibility(GONE);
+
+        if (handler != null && runnable != null) {
+            handler.removeCallbacks(runnable);
+            handler = null;
+            runnable = null;
         }
+
+        if (view != null) {
+            view.setAnimation(null);
+            view.setVisibility(GONE);
+            viewParent.removeView(view);
+            view = null;
+
+        }
+
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        view = layoutInflater.inflate(R.layout.toast, null);
+        viewParent.addView(view);
+        ConstraintLayout.LayoutParams parent = (ConstraintLayout.LayoutParams) view.getLayoutParams();
+        parent.leftToRight = viewParent.getId();
+        parent.bottomToBottom = viewParent.getId();
+        parent.bottomMargin = 10;
+        view.setVisibility(GONE);
+
         ML_Toast ml_toast = view.findViewById(R.id.ml_Toast);
         ml_toast.mackToast(message, icon, iconTintColor);
-        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_in_left));
-        Handler handlerShow = new Handler();
-        handlerShow.postDelayed(() -> {
-            show(context, viewParent, view, message);
-        }, 700);
+        view.setAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_in_left));
+        view.setVisibility(VISIBLE);
+        runnable = () -> show(context, message);
+        handler = new Handler();
+        handler.postDelayed(runnable, 700);
 
     }
     //______________________________________________________________________________________________ showToast
 
 
     //______________________________________________________________________________________________ show
-    private static void show(Context context, ConstraintLayout viewParent, View view, String message) {
+    private static void show(Context context, String message) {
 
-        viewParent.addView(view);
-        ConstraintLayout.LayoutParams parent = (ConstraintLayout.LayoutParams) view.getLayoutParams();
-        parent.leftToRight = viewParent.getId();
-        parent.bottomToBottom = viewParent.getId();
-        parent.bottomMargin = 10;
+        if (handler != null && runnable != null) {
+            handler.removeCallbacks(runnable);
+            handler = null;
+            runnable = null;
+        }
 
         int delay;
         int titleLength = message.length();
@@ -156,11 +178,21 @@ public class ML_Toast extends LinearLayout {
         delay = 1000 * titleLength;
         if (delay < 1500)
             delay = 2500;
-        Handler handler = new Handler();
-        handler.postDelayed(() -> {
-            view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_out_left));
-            view.setVisibility(GONE);
-        }, delay);
+
+        runnable = () -> {
+            if (view.getVisibility() == View.VISIBLE) {
+                view.setAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_out_left));
+                view.setVisibility(GONE);
+                if (handler != null && runnable != null) {
+                    handler.removeCallbacks(runnable);
+                    handler = null;
+                    runnable = null;
+                }
+            }
+        };
+        handler = new Handler();
+        handler.postDelayed(runnable, delay);
+
     }
     //______________________________________________________________________________________________ show
 
