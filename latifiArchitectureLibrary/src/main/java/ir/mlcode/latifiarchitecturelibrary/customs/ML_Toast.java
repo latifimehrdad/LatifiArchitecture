@@ -129,18 +129,13 @@ public class ML_Toast extends LinearLayout {
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         view = layoutInflater.inflate(R.layout.toast, null);
-        viewParent.addView(view);
-        ConstraintLayout.LayoutParams parent = (ConstraintLayout.LayoutParams) view.getLayoutParams();
-        parent.leftToRight = viewParent.getId();
-        parent.bottomToBottom = viewParent.getId();
-        parent.bottomMargin = 10;
         view.setVisibility(GONE);
 
         ML_Toast ml_toast = view.findViewById(R.id.ml_Toast);
         ml_toast.mackToast(message, icon, iconTintColor);
         view.setAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_in_left));
         view.setVisibility(VISIBLE);
-        runnable = () -> show(context, message);
+        runnable = () -> show(context, message, viewParent);
         handler = new Handler();
         handler.postDelayed(runnable, 700);
 
@@ -170,13 +165,19 @@ public class ML_Toast extends LinearLayout {
 
 
     //______________________________________________________________________________________________ show
-    private static void show(Context context, String message) {
+    private static void show(Context context, String message, ConstraintLayout viewParent) {
 
         if (handler != null && runnable != null) {
             handler.removeCallbacks(runnable);
             handler = null;
             runnable = null;
         }
+
+        viewParent.addView(view);
+        ConstraintLayout.LayoutParams parent = (ConstraintLayout.LayoutParams) view.getLayoutParams();
+        parent.leftToRight = viewParent.getId();
+        parent.bottomToBottom = viewParent.getId();
+        parent.bottomMargin = 10;
 
         int delay;
         int titleLength = message.length();
