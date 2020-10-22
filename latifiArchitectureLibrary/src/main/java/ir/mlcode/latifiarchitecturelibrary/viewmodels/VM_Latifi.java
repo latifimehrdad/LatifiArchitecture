@@ -32,9 +32,11 @@ import java.util.List;
 import io.reactivex.subjects.PublishSubject;
 import ir.mlcode.latifiarchitecturelibrary.R;
 import ir.mlcode.latifiarchitecturelibrary.application.APP_Latifi;
+import ir.mlcode.latifiarchitecturelibrary.customs.ML_Toast;
 import ir.mlcode.latifiarchitecturelibrary.daggers.utility.DaggerUtilityComponent;
 import ir.mlcode.latifiarchitecturelibrary.daggers.utility.UtilityComponent;
 import ir.mlcode.latifiarchitecturelibrary.daggers.utility.UtilityModule;
+import ir.mlcode.latifiarchitecturelibrary.fragments.FR_Latifi;
 import ir.mlcode.latifiarchitecturelibrary.models.MD_Message;
 import ir.mlcode.latifiarchitecturelibrary.models.MD_ResponsePrimary;
 import ir.mlcode.latifiarchitecturelibrary.models.MR_Primary;
@@ -211,6 +213,7 @@ public class VM_Latifi extends BaseObservable {
             primaryCall.cancel();
             primaryCall = null;
         }
+        ML_Toast.hide(FR_Latifi.constraintLayout);
     }
     //______________________________________________________________________________________________ cancelRequest
 

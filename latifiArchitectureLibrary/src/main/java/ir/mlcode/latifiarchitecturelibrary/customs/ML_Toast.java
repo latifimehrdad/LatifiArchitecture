@@ -125,19 +125,7 @@ public class ML_Toast extends LinearLayout {
     //______________________________________________________________________________________________ showToast
     public static void showToast(Context context, ConstraintLayout viewParent, String message, Drawable icon, int iconTintColor) {
 
-        if (handler != null && runnable != null) {
-            handler.removeCallbacks(runnable);
-            handler = null;
-            runnable = null;
-        }
-
-        if (view != null) {
-            view.setAnimation(null);
-            view.setVisibility(GONE);
-            viewParent.removeView(view);
-            view = null;
-
-        }
+        hide(viewParent);
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         view = layoutInflater.inflate(R.layout.toast, null);
@@ -158,6 +146,27 @@ public class ML_Toast extends LinearLayout {
 
     }
     //______________________________________________________________________________________________ showToast
+
+
+
+    //______________________________________________________________________________________________ hide
+    public static void hide(ConstraintLayout viewParent) {
+
+        if (handler != null && runnable != null) {
+            handler.removeCallbacks(runnable);
+            handler = null;
+            runnable = null;
+        }
+
+        if (view != null) {
+            view.setAnimation(null);
+            view.setVisibility(GONE);
+            viewParent.removeView(view);
+            view = null;
+
+        }
+    }
+    //______________________________________________________________________________________________ hide
 
 
     //______________________________________________________________________________________________ show

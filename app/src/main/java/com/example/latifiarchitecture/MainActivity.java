@@ -18,11 +18,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-/*        ConstraintLayout test = findViewById(R.id.test);
+        ConstraintLayout test = findViewById(R.id.test);
         Button button = findViewById(R.id.button);
 
         button.setOnClickListener(v -> {
             ML_Toast.showToast(MainActivity.this, test, "تست زمان توست", getResources().getDrawable(R.drawable.ic_launcher_foreground), getResources().getColor(ir.mlcode.latifiarchitecturelibrary.R.color.mlCollectRight1));
-        });*/
+        });
     }
 }
