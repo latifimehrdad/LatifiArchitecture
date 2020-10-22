@@ -30,6 +30,8 @@ public class ML_Toast extends LinearLayout {
 
     private Drawable toastBack;
 
+    private static View view;
+
     private int textColor;
     private int textSize;
     private int fontFamilyId;
@@ -117,8 +119,13 @@ public class ML_Toast extends LinearLayout {
 
     //______________________________________________________________________________________________ showToast
     public static void showToast(Context context, ConstraintLayout viewParent, String message, Drawable icon, int iconTintColor) {
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.toast, null);
+        if (view == null) {
+            LayoutInflater layoutInflater = LayoutInflater.from(context);
+            view = layoutInflater.inflate(R.layout.toast, null);
+        } else {
+            if (view.getVisibility() == View.VISIBLE)
+                view.setVisibility(GONE);
+        }
         ML_Toast ml_toast = view.findViewById(R.id.ml_Toast);
         ml_toast.mackToast(message, icon, iconTintColor);
         view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_in_left));
