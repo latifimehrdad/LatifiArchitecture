@@ -150,38 +150,6 @@ public class VM_Latifi extends BaseObservable {
     //______________________________________________________________________________________________ checkResponseIfThatIsGeneral
 
 
-    //______________________________________________________________________________________________ getResponseMessage
-    public String getResponseMessage(MD_ResponsePrimary responsePrimary) {
-        try {
-            ArrayList<MD_Message> modelMessages = responsePrimary.getMessages();
-            StringBuilder message = new StringBuilder();
-            for (int i = 0; i < modelMessages.size(); i++) {
-                message.append(modelMessages.get(i).getMessage());
-                message.append("\n");
-            }
-            return message.toString();
-        } catch (Exception ex) {
-            return getContext().getResources().getString(R.string.NetworkError);
-        }
-    }
-    //______________________________________________________________________________________________ getResponseMessage
-
-
-
-    //______________________________________________________________________________________________ getResponseMessages
-    public String getResponseMessages(MR_Primary response) {
-        StringBuilder result = new StringBuilder();
-        if (response.getMessages() != null && response.getMessages().size() > 0)
-            for (String message : response.getMessages())
-                result.append(message).append(System.getProperty("line.separator"));
-        else
-            result = new StringBuilder(response.getMessage());
-
-        return result.toString();
-    }
-    //______________________________________________________________________________________________ getResponseMessages
-
-
 
     //______________________________________________________________________________________________ reactionToIncorrectResponse
     public void reactionToIncorrectResponse(Byte action) {
