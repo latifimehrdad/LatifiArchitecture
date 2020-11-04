@@ -203,12 +203,36 @@ public class ML_Button extends LinearLayout {
 
     //______________________________________________________________________________________________ setTextAndTintColor
     public void setTextAndTintColor(int color) {
-        textColor = color;
-        imageTint = color;
+        textView.setTextColor(color);
+        imageView.setColorFilter(color);
+    }
+    //______________________________________________________________________________________________ setTextAndTintColor
+
+
+
+    //______________________________________________________________________________________________ setTextAndTintDefaultColor
+    public void setTextAndTintDefaultColor(int color) {
         textView.setTextColor(textColor);
         imageView.setColorFilter(imageTint);
     }
-    //______________________________________________________________________________________________ setTextAndTintColor
+    //______________________________________________________________________________________________ setTextAndTintDefaultColor
+
+
+    //______________________________________________________________________________________________ setCustomBackgroundDrawable
+    public void setCustomBackgroundDrawable(Drawable drawable) {
+        setBackground(drawable);
+    }
+    //______________________________________________________________________________________________ setCustomBackgroundDrawable
+
+
+
+
+    //______________________________________________________________________________________________ setBackgroundDefaultDrawable
+    public void setBackgroundDefaultDrawable(int drawable) {
+        setBackground(normalBack);
+    }
+    //______________________________________________________________________________________________ setBackgroundDefaultDrawable
+
 
 
 
