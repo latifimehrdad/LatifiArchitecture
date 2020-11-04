@@ -186,4 +186,30 @@ public class ML_Button extends LinearLayout {
     //______________________________________________________________________________________________ isClick
 
 
+
+    //______________________________________________________________________________________________ getTextView
+    public TextView getTextView() {
+        return textView;
+    }
+    //______________________________________________________________________________________________ getTextView
+
+
+    //______________________________________________________________________________________________ getImageView
+    public ImageView getImageView() {
+        return imageView;
+    }
+    //______________________________________________________________________________________________ getImageView
+
+
+    //______________________________________________________________________________________________ setTextAndTintColor
+    public void setTextAndTintColor(int color) {
+        textColor = color;
+        imageTint = color;
+        textView.setTextColor(textColor);
+        imageView.setColorFilter(imageTint);
+    }
+    //______________________________________________________________________________________________ setTextAndTintColor
+
+
+
 }
