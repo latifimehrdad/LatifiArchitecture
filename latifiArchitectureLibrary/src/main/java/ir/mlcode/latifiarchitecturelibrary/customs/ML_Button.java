@@ -87,7 +87,6 @@ public class ML_Button extends LinearLayout {
     //______________________________________________________________________________________________ ML_Button
 
 
-
     //______________________________________________________________________________________________ configEditText
     private void configText() {
         if (text != null) {
@@ -137,8 +136,6 @@ public class ML_Button extends LinearLayout {
     //______________________________________________________________________________________________ configIcon
 
 
-
-
     //______________________________________________________________________________________________ startLoading
     public void startLoading() {
         click = true;
@@ -186,7 +183,6 @@ public class ML_Button extends LinearLayout {
     //______________________________________________________________________________________________ isClick
 
 
-
     //______________________________________________________________________________________________ getTextView
     public TextView getTextView() {
         return textView;
@@ -203,17 +199,21 @@ public class ML_Button extends LinearLayout {
 
     //______________________________________________________________________________________________ setTextAndTintColor
     public void setTextAndTintColor(int color) {
-        textView.setTextColor(color);
-        imageView.setColorFilter(color);
+        if (textView != null)
+            textView.setTextColor(color);
+        if (imageView != null)
+            imageView.setColorFilter(color);
+
     }
     //______________________________________________________________________________________________ setTextAndTintColor
 
 
-
     //______________________________________________________________________________________________ setTextAndTintDefaultColor
-    public void setTextAndTintDefaultColor(int color) {
-        textView.setTextColor(textColor);
-        imageView.setColorFilter(imageTint);
+    public void setTextAndTintDefaultColor() {
+        if (textView != null)
+            textView.setTextColor(textColor);
+        if (imageView != null)
+            imageView.setColorFilter(imageTint);
     }
     //______________________________________________________________________________________________ setTextAndTintDefaultColor
 
@@ -225,15 +225,11 @@ public class ML_Button extends LinearLayout {
     //______________________________________________________________________________________________ setCustomBackgroundDrawable
 
 
-
-
     //______________________________________________________________________________________________ setBackgroundDefaultDrawable
     public void setBackgroundDefaultDrawable(int drawable) {
         setBackground(normalBack);
     }
     //______________________________________________________________________________________________ setBackgroundDefaultDrawable
-
-
 
 
 }
