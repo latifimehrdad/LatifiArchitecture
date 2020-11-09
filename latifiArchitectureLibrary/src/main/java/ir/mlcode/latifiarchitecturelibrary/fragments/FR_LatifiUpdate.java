@@ -79,6 +79,12 @@ public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.fragmentActi
         setPublishSubjectFromObservable(
                 FR_LatifiUpdate.this,
                 vm_Latifi_update);
+        if (handlerDownload == null) {
+            List<String> list = new ArrayList<>();
+            list.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+            list.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            setPermission(list);
+        }
     }
     //______________________________________________________________________________________________ onStart
 
@@ -90,10 +96,6 @@ public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.fragmentActi
             fileName = getArguments().getString(getContext().getResources().getString(R.string.ML_UpdateFileName), "");
             appName = getArguments().getString(getContext().getResources().getString(R.string.ML_AppName), "");
             applicationId = getArguments().getString(getContext().getResources().getString(R.string.ML_ApplicationId), "");
-            List<String> list = new ArrayList<>();
-            list.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-            list.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            setPermission(list);
         }
 
     }
