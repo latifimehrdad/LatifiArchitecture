@@ -14,6 +14,10 @@
     <string name="ML_UpdateFileName">ML_UpdateFileName></string>
     <string name="FileDownloaded">پایان بارگیری فایل</string>
 
+    <string name="playError">خطا در پخش فایل</string>
+    <string name="loadingFile">در حال بارگزاری ...</string>
+    <string name="returnVideo">بازگشت</string>
+
     <string name="pick_image_intent_chooser_title">برش تصویر</string>
 
 </resources>
