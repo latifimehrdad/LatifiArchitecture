@@ -58,6 +58,8 @@ public class FR_Latifi extends Fragment {
 
         void OnBackPress();
 
+        void init();
+
     }
     //______________________________________________________________________________________________ getActionFromObservable
 

@@ -90,7 +90,9 @@ public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.fragmentActi
 
 
     //______________________________________________________________________________________________ init
-    private void init() {
+    @Override
+    public void init() {
+
         if (getContext() != null && getArguments() != null) {
             fileUrl = getArguments().getString(getContext().getResources().getString(R.string.ML_UpdateUrl), "");
             fileName = getArguments().getString(getContext().getResources().getString(R.string.ML_UpdateFileName), "");
@@ -100,6 +102,7 @@ public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.fragmentActi
 
     }
     //______________________________________________________________________________________________ init
+
 
 
     private void setOnClick() {//___________________________________________________________________ setOnClick
@@ -196,5 +199,7 @@ public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.fragmentActi
     public void OnBackPress() {
 
     }
+
+
 
 }
