@@ -371,18 +371,21 @@ public class FR_Latifi extends Fragment {
 
     //______________________________________________________________________________________________ setVariableToNavigation
     public void setVariableToNavigation(String saveKey, String saveValue) {
-        if (getView() != null)
-            Navigation.findNavController(getView()).getPreviousBackStackEntry().getArguments().putString(saveKey, saveValue);
-//        Navigation.findNavController(getView()).getPreviousBackStackEntry().getSavedStateHandle().set(saveKey, saveValue);
+        if (getView() != null) {
+            NavController navigation = Navigation.findNavController(getView());
+            navigation.getPreviousBackStackEntry().getSavedStateHandle().set(saveKey, saveValue);
+        }
+
     }
     //______________________________________________________________________________________________ setVariableToNavigation
 
 
     //______________________________________________________________________________________________ getVariableFromNavigation
     public String getVariableFromNavigation(String saveKey) {
-        if (getView() != null)
-            return Navigation.findNavController(getView()).getCurrentBackStackEntry().getArguments().getString(saveKey);
-//            return Navigation.findNavController(getView()).getCurrentBackStackEntry().getSavedStateHandle().get(saveKey);
+        if (getView() != null) {
+            NavController navigation = Navigation.findNavController(getView());
+            return navigation.getCurrentBackStackEntry().getSavedStateHandle().get(saveKey);
+        }
         else
             return null;
     }
