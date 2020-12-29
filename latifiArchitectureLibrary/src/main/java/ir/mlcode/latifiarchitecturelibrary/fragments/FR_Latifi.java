@@ -384,7 +384,9 @@ public class FR_Latifi extends Fragment {
     public String getVariableFromNavigation(String saveKey) {
         if (getView() != null) {
             NavController navigation = Navigation.findNavController(getView());
-            return navigation.getCurrentBackStackEntry().getSavedStateHandle().get(saveKey);
+            String value = navigation.getCurrentBackStackEntry().getSavedStateHandle().get(saveKey);
+            navigation.getCurrentBackStackEntry().getSavedStateHandle().set(saveKey, null);
+            return value;
         }
         else
             return null;
