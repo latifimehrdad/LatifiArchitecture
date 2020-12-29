@@ -70,16 +70,19 @@ public class DialogMessage extends DialogFragment {
         binding.setTitel("");
         view = binding.getRoot();
         ButterKnife.bind(this, view);
+
+        layout = view.findViewById(R.id.layout);
         layout.setBackgroundColor(color);
+        DialogTitle = view.findViewById(R.id.DialogTitle);
         DialogTitle.setText(Title);
+        DialogImg = view.findViewById(R.id.DialogImg);
         DialogImg.setImageDrawable(icon);
         DialogImg.setColorFilter(tintColor);
-        DialogIgnor.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                subject.onNext(StaticValues.ML_DialogClose);
-                DialogMessage.this.dismiss();
-                subject = null;
-            }
+        DialogIgnor = view.findViewById(R.id.DialogIgnor);
+        DialogIgnor.setOnClickListener(view1 -> {
+            subject.onNext(StaticValues.ML_DialogClose);
+            DialogMessage.this.dismiss();
+            subject = null;
         });
         Dialog dialog = new AlertDialog.Builder(context).setView(view).create();
         Animation buttom = AnimationUtils.loadAnimation(context, R.anim.slide_in_bottom);
