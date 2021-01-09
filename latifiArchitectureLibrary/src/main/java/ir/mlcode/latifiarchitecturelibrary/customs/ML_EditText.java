@@ -370,23 +370,42 @@ public class ML_EditText extends LinearLayout {
     @BindingAdapter("textAttrChanged")
     public static void setListeners(ML_EditText view, final InverseBindingListener listener) {
         if (listener != null) {
-            view.getEditText().addTextChangedListener(new TextWatcher() {
+            if (view.editable)
+                view.getEditText().addTextChangedListener(new TextWatcher() {
 
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                }
+                    }
 
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                }
+                    }
 
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    listener.onChange();
-                }
-            });
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        listener.onChange();
+                    }
+                });
+            else
+                view.getTextView().addTextChangedListener(new TextWatcher() {
+
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        listener.onChange();
+                    }
+                });
         }
     }
     //______________________________________________________________________________________________ setListeners
