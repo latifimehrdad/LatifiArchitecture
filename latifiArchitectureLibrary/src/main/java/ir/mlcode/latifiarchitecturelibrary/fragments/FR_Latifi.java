@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Editable;
@@ -59,6 +60,8 @@ public class FR_Latifi extends Fragment {
         void OnBackPress();
 
         void init();
+
+        void cropImage(Uri uri);
 
     }
     //______________________________________________________________________________________________ getActionFromObservable

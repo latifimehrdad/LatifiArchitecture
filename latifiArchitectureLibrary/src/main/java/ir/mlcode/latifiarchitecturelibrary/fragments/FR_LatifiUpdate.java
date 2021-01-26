@@ -104,6 +104,10 @@ public class FR_LatifiUpdate extends FR_Latifi implements FR_Latifi.fragmentActi
     //______________________________________________________________________________________________ init
 
 
+    @Override
+    public void cropImage(Uri uri) {
+
+    }
 
     private void setOnClick() {//___________________________________________________________________ setOnClick
 
