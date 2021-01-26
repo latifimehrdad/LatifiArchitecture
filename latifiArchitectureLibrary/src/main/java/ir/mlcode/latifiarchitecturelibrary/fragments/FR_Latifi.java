@@ -41,7 +41,7 @@ public class FR_Latifi extends Fragment {
     private DisposableObserver<Byte> disposableObserver;
     private Activity context;
     private View view;
-    private fragmentActions fragmentActions;
+    public fragmentActions fragmentAction;
     private VM_Latifi vm_latifi;
     private int svg_error;
     private int svg_ok;
@@ -81,7 +81,7 @@ public class FR_Latifi extends Fragment {
         pressedCallback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                fragmentActions.OnBackPress();
+                fragmentAction.OnBackPress();
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, pressedCallback);
@@ -146,11 +146,11 @@ public class FR_Latifi extends Fragment {
 
     //______________________________________________________________________________________________ setPublishSubjectFromObservable
     public void setPublishSubjectFromObservable(
-            fragmentActions fragmentActions,
+            fragmentActions fragmentAction,
             VM_Latifi vm_latifi,
             int svg_error,
             int svg_ok) {
-        this.fragmentActions = fragmentActions;
+        this.fragmentAction = fragmentAction;
         if (disposableObserver != null)
             disposableObserver.dispose();
         disposableObserver = null;
@@ -165,9 +165,9 @@ public class FR_Latifi extends Fragment {
 
     //______________________________________________________________________________________________ setPublishSubjectFromObservable
     public void setPublishSubjectFromObservable(
-            fragmentActions fragmentActions,
+            fragmentActions fragmentAction,
             VM_Latifi vm_latifi) {
-        this.fragmentActions = fragmentActions;
+        this.fragmentAction = fragmentAction;
         if (disposableObserver != null)
             disposableObserver.dispose();
         disposableObserver = null;
@@ -215,17 +215,17 @@ public class FR_Latifi extends Fragment {
 
 
                 if (action.equals(StaticValues.ML_DialogClose)) {
-                    fragmentActions.getActionFromObservable(action);
+                    fragmentAction.getActionFromObservable(action);
                     return;
                 }
 
                 if (vm_latifi.getResponseMessage() == null) {
-                    fragmentActions.getActionFromObservable(action);
+                    fragmentAction.getActionFromObservable(action);
                     return;
                 }
 
                 if (vm_latifi.getResponseMessage().equalsIgnoreCase("")) {
-                    fragmentActions.getActionFromObservable(action);
+                    fragmentAction.getActionFromObservable(action);
                     return;
                 }
 
@@ -237,14 +237,14 @@ public class FR_Latifi extends Fragment {
                             getResources().getColor(R.color.mlHarmony),
                             getResources().getDrawable(svg_error),
                             getResources().getColor(R.color.mlCollectRight1));
-                    fragmentActions.actionWhenFailureRequest();
+                    fragmentAction.actionWhenFailureRequest();
                     return;
                 } else {
                     showToast(vm_latifi.getResponseMessage()
                             , getResources().getColor(R.color.mlWhite),
                             getResources().getDrawable(svg_ok),
                             getResources().getColor(R.color.mlWave4));
-                    fragmentActions.getActionFromObservable(action);
+                    fragmentAction.getActionFromObservable(action);
                 }
             });
         }
