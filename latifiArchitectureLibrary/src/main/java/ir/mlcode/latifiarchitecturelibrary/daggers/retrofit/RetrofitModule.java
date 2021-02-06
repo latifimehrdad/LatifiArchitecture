@@ -2,11 +2,16 @@ package ir.mlcode.latifiarchitecturelibrary.daggers.retrofit;
 
 import android.content.Context;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.io.File;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
 import dagger.Module;
@@ -15,6 +20,8 @@ import ir.mlcode.latifiarchitecturelibrary.daggers.DaggerScope;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Converter;
+import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
@@ -31,6 +38,30 @@ public class RetrofitModule {
         this.gson = gson;
     }
 
+    public class EnumRetrofitConverterFactory extends Converter.Factory {
+        @Override
+        public Converter<?, String> stringConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
+            Converter<?, String> converter = null;
+            if (type instanceof Class && ((Class<?>)type).isEnum()) {
+                converter = value -> EnumUtils.GetSerializedNameValue((Enum) value);
+            }
+            return converter;
+        }
+    }
+
+
+    public static class EnumUtils {
+        @Nullable
+        static public <E extends Enum<E>> String GetSerializedNameValue(E e) {
+            String value = null;
+            try {
+                value = e.getClass().getField(e.name()).getAnnotation(SerializedName.class).value();
+            } catch (NoSuchFieldException exception) {
+                exception.printStackTrace();
+            }
+            return value;
+        }
+    }
 
     @Provides
     @DaggerScope
@@ -49,9 +80,11 @@ public class RetrofitModule {
                 .baseUrl(Host)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(new EnumRetrofitConverterFactory())
                 .client(okHttpClient)
                 .build();
     }
+
 
     @Provides
     @DaggerScope
