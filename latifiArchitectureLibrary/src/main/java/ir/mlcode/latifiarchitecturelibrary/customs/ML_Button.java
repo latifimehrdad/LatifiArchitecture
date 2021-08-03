@@ -242,7 +242,7 @@ public class ML_Button extends LinearLayout {
 
 
     //______________________________________________________________________________________________ setText
-    @BindingAdapter("text")
+    @BindingAdapter("textValue")
     public static void setTitle(ML_Button view, String newValue) {
         if (view == null || newValue == null)
             return;
@@ -258,7 +258,7 @@ public class ML_Button extends LinearLayout {
 
 
     //______________________________________________________________________________________________ setNormalBack
-    @BindingAdapter("normalBack")
+    @BindingAdapter("connectBack")
     public static void setNormalBack(ML_Button view, Drawable normalBack) {
         view.normalBack = normalBack;
         view.setBackground(normalBack);
