@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.databinding.BindingAdapter;
 
 import com.cunoraz.gifview.library.GifView;
 
@@ -231,5 +232,55 @@ public class ML_Button extends LinearLayout {
     }
     //______________________________________________________________________________________________ setBackgroundDefaultDrawable
 
+
+    //______________________________________________________________________________________________ setTitle
+    public void setTitle(String title) {
+        this.text = title;
+        textView.setText(title);
+    }
+    //______________________________________________________________________________________________ setTitle
+
+
+    //______________________________________________________________________________________________ setText
+    @BindingAdapter("text")
+    public static void setTitle(ML_Button view, String newValue) {
+        if (view == null || newValue == null)
+            return;
+
+        if (view.getText() == null || !view.text.equalsIgnoreCase(newValue)) {
+            view.text = newValue;
+            view.getTextView().setText(view.text);
+            return;
+        }
+
+    }
+    //______________________________________________________________________________________________ setText
+
+
+    //______________________________________________________________________________________________ setNormalBack
+    @BindingAdapter("normalBack")
+    public static void setNormalBack(ML_Button view, Drawable normalBack) {
+        view.normalBack = normalBack;
+        view.setBackground(normalBack);
+    }
+    //______________________________________________________________________________________________ setNormalBack
+
+
+
+    //______________________________________________________________________________________________ getText
+    public String getText() {
+        return text;
+    }
+    //______________________________________________________________________________________________ getText
+
+
+
+    //______________________________________________________________________________________________ setIcon
+    @BindingAdapter("icon")
+    public static void setIcon(ML_Button view, Drawable icon) {
+        view.imageSrc = icon;
+        view.imageView.setImageDrawable(icon);
+    }
+    //______________________________________________________________________________________________ setIcon
 
 }
