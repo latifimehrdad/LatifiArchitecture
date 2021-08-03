@@ -90,7 +90,6 @@ public class ML_Button extends LinearLayout {
 
     //______________________________________________________________________________________________ configEditText
     private void configText() {
-        if (text != null) {
             textView = new TextView(context);
             LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             textView.setTextColor(textColor);
@@ -103,7 +102,6 @@ public class ML_Button extends LinearLayout {
             if (fontFamilyId > 0)
                 textView.setTypeface(ResourcesCompat.getFont(getContext(), fontFamilyId));
             addView(textView, params);
-        }
     }
     //______________________________________________________________________________________________ configEditText
 
